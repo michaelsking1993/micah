@@ -25,4 +25,4 @@ production:
   <<: *default
   database: micah_database
   username: 
-  password: 
+  password:
