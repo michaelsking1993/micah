@@ -1,0 +1,69 @@
+<style>
+  .feature-container {
+    height:240px;
+    margin:20px;
+  }
+  .status-updates {
+    width:100%;
+  }
+  .status-update {
+    width:200px;
+    height:200px;
+    margin-right:8px;
+    float:left;
+    position:relative;
+    word-wrap:break-word;
+  }
+</style>
+
+<h1 class="title"><%= @project.title %></h1>
+<h2 class="subtitle"><%= @project.description %></h2>
+
+<%= link_to 'add task/feature', new_feature_path(project_id: @project.id) %><br /><br />
+<% @project.features.each do |feature| %>
+    <div class="columns" style="background-color:grey;margin-bottom:32px;">
+      <div class="card column is-2">
+        <p class="subtitle has-text-weight-bold">
+          <%= feature.title %>
+        </p>
+        <p>
+          <%= feature.description %>
+        </p>
+      </div>
+      <div class="column is-2">
+        <% feature.steps.each do |step| %>
+            <label class="checkbox">
+              <% if step.done %>
+                  <%= link_to step_path(step), method: :patch do %>
+                    <input type="checkbox" checked="checked">
+                  <% end %>
+                  <span style="text-decoration:line-through;">
+                    <%= step.title %>
+                  </span>
+              <% else %>
+                  <%= link_to step_path(step), method: :patch do %>
+                    <input type="checkbox">
+                  <% end %>
+                  <%= step.title %>
+              <% end %>
+            </label>
+            <br/>
+        <% end %>
+        <%= link_to 'add step', new_step_path(feature_id: feature.id) %>
+      </div>
+      <div class="column is-8 status-updates">
+        <div class="box status-update">
+          <%= link_to 'new update', new_status_update_path(feature_id: feature.id) %>
+        </div>
+        <% feature.status_updates.order(created_at: :desc).each do |status_update| %>
+          <div class="box status-update">
+            <span style="position:absolute;top:0;right:0;font-size:12px;"><%=status_update.created_at.strftime("%B %e,%l:%M %p")%></span>
+            <!--<h2 class="subtitle"><%#= status_update.title %></h2>-->
+            <p><%= status_update.notes %></p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+<% end %>

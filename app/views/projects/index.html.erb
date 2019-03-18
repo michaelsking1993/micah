@@ -1,0 +1,43 @@
+<style>
+  .card {
+    width:30%;
+    margin:20px;
+  }
+  .project-date {
+    position:absolute;
+    right:2%;
+    top:0;
+    font-size:14px;
+  }
+</style>
+
+<%= link_to 'new project', new_project_path, class: 'button is-success', style: 'margin:20px;margin-bottom:0px;' %>
+
+<% @projects.each do |project| %>
+    <div class="card">
+      <header class="card-header">
+        <p class="card-header-title">
+          <span style="text-decoration:<%= project.done ? 'line-through' : '' %>">
+             <%= project.title %>
+          </span>
+        </p>
+        <a href="#" class="card-header-icon" aria-label="more options">
+          <span class="icon">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </a>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <%= project.description %>
+          <time class="project-date" datetime="<%= project.created_at.strftime("%B %Y") %>"><%= project.created_at.strftime("%B %Y") %></time>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <%= link_to 'Open', project_path(project), class: 'card-footer-item' %>
+        <%= link_to 'Edit', edit_project_path(project), class: 'card-footer-item' %>
+        <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure?'}, class: 'card-footer-item' %>
+      </footer>
+    </div>
+<% end %>
+

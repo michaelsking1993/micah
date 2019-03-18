@@ -1,0 +1,293 @@
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: linear-gradient(90deg, #04C3D5, #0283D6);
+  }
+
+  .container {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  .logo {
+    float: left;
+    width: 150px;
+    border: 3px solid #fff;
+    padding: 10px 0;
+    margin: 25px 0;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .logo-title {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+  }
+
+  nav {
+    float: right;
+  }
+
+  nav ul {
+    margin: 0;
+    padding: 0;
+    /*list-style: none;*/
+  }
+
+  ul {
+    list-style: disc;
+    font-family: inherit;
+  }
+
+  nav ul li {
+    display: inline-block;
+    margin-left: 70px;
+    line-height: 95px;
+  }
+
+  nav ul li a {
+    color: rgb(255, 255, 255, 0.5);
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+  }
+
+  nav ul li a:hover {
+    color: rgb(255, 255, 255, 1);
+  }
+
+  .intro {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .intro-title {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 64px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+    text-align: left;
+    /*margin-top: 200px;*/
+    width: 50%;
+    text-shadow: 0px 0px 1px rgba(150, 150, 150, 1);
+  }
+
+  .intro-des {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2.5px;
+    margin-top: 10px;
+    text-align: left;
+    width: 75%;
+  }
+
+  .splash-text {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-top: 10px;
+    text-align: left;
+    width: 75%;
+
+  }
+
+  .btn-container {
+    text-align: left;}
+
+  .btn {
+    display: inline-block;
+    margin: 50px 0;
+    margin-right: 10px;
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+  }
+  a:hover {
+    color:inherit;
+    background-color: inherit;
+  }
+
+  .btn-text {
+    color: #fff;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 300ms ease-in-out;
+  }
+
+  .btn:hover {
+    background-color: #fff;
+  }
+
+  .btn:hover .btn-text {
+    background: linear-gradient(90deg, #04C3D5, #0283D6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .waves {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    z-index: -3;
+  }
+
+  .waves img {
+    width: 100%;
+  }
+</style>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Landing Page</title>
+</head>
+<body>
+
+<header>
+  <div class="container">
+
+    <!--<div class="logo">
+      <span class="logo-title">Logo</span>
+    </div>-->
+
+    <nav>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Use Case</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<div class="container">
+  <div class="intro">
+    <div class="intro-title">Micah.</div>
+    <div class="intro-des">
+      Visualize your work, with Micah.
+      <br /><br />
+      Micah is an easy-to-use, project-based task tracker. It even lets you include status updates.
+
+    </div>
+    <div class="btn-container">
+      <% if current_user %>
+          <%= link_to projects_path do %>
+              <div class="btn">
+                <span class="btn-text">See my tasks</span>
+              </div>
+          <% end %>
+      <% else %>
+          <%= link_to signup_path do %>
+              <div class="btn">
+                <span class="btn-text">Sign up</span>
+              </div>
+          <% end %>
+          <%= link_to login_path do %>
+              <div class="btn">
+                <span class="btn-text">Login</span>
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+    <p id="notice"><%= notice %></p>
+  </div>
+
+</div>
+<img src="https://melbournechapter.net/images/laptop-clipart-laptop-tablet-2.png">
+<div class="waves">
+  <img src="https://claritylocums.ie/images/wave_pattern.png">
+</div>
+
+<div id="about" class="container splash-text">
+  <h2 class="subtitle">About Micah:</h2>
+  Micah is based on an excel spreadsheet system used by Micah [insert_last_name]. It spoke to me when I saw it because
+  it incorporates elements of GTD methodology (Getting Things Done, an organizational framework), but in a way that
+  combines all aspects of GTD into the same place: lists, projects, next actions, and steps. It even includes a way
+  to "comment" on the project, giving status updates that file in horizontally in a date-ordered format, so that you
+  always see the most recent update.
+  <br /><br />
+  In sum, a simple way to visualize your projects, the associated tasks, and date-ordered status updates, all in one place.
+</div>
+<br /><br />
+<div id="features" class="container splash-text">
+  <h2 class="subtitle">Micah's features:</h2>
+  <ul>
+    <li>Add an area, a place where you'd like to keep related projects [coming soon]</li>
+    <br />
+    <li>Add a feature/task/"mini-project". Add as many of these as you'd like.</li>
+    <br />
+    <li>For each, add all the relevant steps. They will show up next to the project.</li>
+    <br />
+    <li>As you go about completing the steps, feel free to add as many status updates as you'd like.</li>
+    <br />
+    <li>Visualize what you've done, and what the status is; see the steps as a checklist, and all your status updates
+       to the right, with the most recent one first. This lets you stay up to date with what's done, what's left to do,
+      and any relevant notes you'd like to include on a day to day basis. In one place.</li>
+  </ul>
+</div>
+<br /><br />
+<div id="use case" class="container splash-text">
+  <h2 class="subtitle">Micah's use case:</h2>
+  Doing work is easy (kind of). Doing the right work can be harder. Some of us that are more organizationally
+  challenged can find ourselves making lists on lists on lists, without a way to clearly break down what goal
+  each list is going toward, and what steps are left for each goal.
+  <br/><br/>
+  There's plenty of organizational frameworks out there. GTD (Getting Things Done) is one of the ones I got very excited about,
+  but I found that while in theory it was great, I didn't have a way to put all the components in the same place. As such, I found
+  myself scrambling from list to list, duplicating things, putting notes everywhere, yet never knowing where anything was.
+  <br /><br />
+  I've tried several different tools/apps (Trello for work-related tasks, and Things for personal tasks), but with both, I found
+  that having the information nested inside different screens turned it into a virtual wormhole. As someone "with OCD/ADHD",
+  I like to be able to see my stuff (I often consider that technology is causing my "ADHD/OCD tendencies", as I do wonderfully
+  when everything is on paper).
+  <br /><br />
+  In any case, Micah bridges that gap. Thank you, Micah [insert_last_name].
+</div>
+<br /><br />
+
+<div id="pricing" class="container splash-text">
+  <h2 class="subtitle">Micah's pricing:</h2>
+  Micah aims to be a useful tool for myself. It would, however, like to make enough money to keep itself alive.
+  <br /><br />
+  Micah plans to be very cheap. Perhaps 10$ per year. This will allow us to maintain server costs, and database costs, once
+  we move beyond the free tier (which is, as its name implies, free...).
+  <br /><br />
+  Proceeds will go towards a Micah [insert_last_name] and Emma Singer's beer/green money.
+</div>
+
+</body>
+</html>

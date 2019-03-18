@@ -1,0 +1,7 @@
+<%= simple_form_for @feature do |f| %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.hidden_field :project_id, value: @feature.project_id %>
+    <%= f.submit %>
+
+<% end %>
