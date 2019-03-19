@@ -1,0 +1,4 @@
+$('body').after("<%= j render 'layouts/modal' %>");
+$('.modal').addClass('is-active');
+$('.modal-card-body').html("<%= j render 'form' %>");
+$('.modal-card-title').html('Edit task')

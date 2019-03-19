@@ -81,8 +81,14 @@
   }
 
   .add-task {
+    position:absolute;
+    left:50%;
+    top:8px;
+  }
+
+  .back-to-dashboard {
     position:relative;
-    left:20px;
+    left:2%;
     top:8px;
   }
 
@@ -101,16 +107,17 @@
   }
 </style>
 <body>
-<%= link_to 'add task', new_feature_path(project_id: @project.id), class: 'button is-success add-task' %>
+<%= link_to 'back to dashboard', projects_path, class: 'back-to-dashboard button is-info' %>
+<%= link_to 'add task', new_feature_path(project_id: @project.id), class: 'button is-success add-task', remote: true %>
 <% @project.features.each do |feature| %>
     <div style="background-color:<%= feature.color? ? feature.color : '' %>" class='feature-div'>
       <div class="feature-description box">
         <h2 class="subtitle"><%= feature.title %></h2>
         <p><%= feature.description %></p>
-        <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature' %>
+        <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature', remote: true %>
       </div>
       <div class="project-step-border-wall"></div>
-      <%= link_to 'Add step', new_step_path(feature_id: feature.id), class: 'new-step-link' %>
+      <%= link_to 'Add step', new_step_path(feature_id: feature.id), class: 'new-step-link', remote: true %>
       <div class="step-list">
         <% feature.steps.sort_by{|step| step.done ? 0 : 1}.each do |step| %>
             <label class="checkbox">
@@ -128,13 +135,13 @@
         <% end %>
       </div>
       <div class="step-status-border-wall"></div>
-      <%= link_to 'New status', new_status_update_path(feature_id: feature.id), class: 'new-update-link' %>
+      <%= link_to 'New status', new_status_update_path(feature_id: feature.id), class: 'new-update-link', remote: true %>
       <div class="status-updates">
         <% feature.status_updates.order(created_at: :desc).each do |status_update| %>
             <div class="box status-update">
               <span class="status-time"><%= status_update.created_at.strftime("%B %e,%l:%M %p") %></span>
               <%= status_update.notes %>
-              <%= link_to 'edit', edit_status_update_path(status_update), class: 'edit-status-update' %>
+              <%= link_to 'edit', edit_status_update_path(status_update), class: 'edit-status-update', remote: true %>
             </div>
         <% end %>
       </div>

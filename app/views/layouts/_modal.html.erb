@@ -1,0 +1,21 @@
+<div class="modal" id="modal-dialog">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="has-text-centered modal-card-title">Modal title</p>
+      <button class="delete close-modal" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+    </section>
+    <!-- hidden by default, remove show-and-tell with JS in final step of flashcard form-->
+    <!--<footer class="modal-card-foot show-and-tell">
+      <button class="button">Submit</button>
+    </footer>-->
+  </div>
+  <script type="text/javascript">
+      $('.close-modal').click(function(){
+          $('#modal-dialog').remove();
+      });
+  </script>
+</div>
