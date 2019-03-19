@@ -25,6 +25,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    if @user.save
+      flash[:success] = 'Awesome! Create a project to get started.'
+      redirect_to projects_path
+    else
+      flash[:error] = 'something went wrong - try again'
+      redirect_to new_user_path
+    end
 
     respond_to do |format|
       if @user.save
