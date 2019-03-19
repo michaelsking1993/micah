@@ -20,6 +20,10 @@ class FeaturesController < ApplicationController
   end
 
   def destroy
+    project = @feature.project
+    @feature.destroy
+    flash[:notice] = 'Task destroyed - on to the next one.'
+    redirect_to project
   end
 
   private

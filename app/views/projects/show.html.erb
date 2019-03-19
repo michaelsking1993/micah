@@ -7,9 +7,9 @@
   }
   .feature-description {
     width: 15%;
-    height:92%;
+    height:88%;
     position:relative;
-    top:4%;
+    top:10%;
     margin:4px;
     overflow-y:scroll;
   }
@@ -97,8 +97,25 @@
 
   .edit-feature {
     position:absolute;
+    top:-1px;
+    left:11.6%;
+    font-size:15px;
+  }
+
+  .destroy-feature {
+    position:absolute;
     top:0;
-    left:2%;
+    left:1%;
+    font-size:12px;
+  }
+
+  .destroy-feature-icon {
+    font-size:16px;
+    position:relative;
+    top:2px;
+  }
+
+  .step-icon {
     font-size:12px;
   }
 
@@ -110,28 +127,38 @@
   }
 </style>
 <body>
+
 <%= link_to 'back to dashboard', projects_path, class: 'back-to-dashboard button is-info' %>
 <%= link_to 'add task', new_feature_path(project_id: @project.id), class: 'button is-success add-task', remote: true %>
 <% @project.features.each do |feature| %>
     <div style="background-color:<%= feature.color? ? feature.color : '' %>" class='feature-div'>
+      <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature', remote: true %>
+      <%= link_to feature_path(feature), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'destroy-feature has-text-danger' do %>
+          <i class="destroy-feature-icon fa fa-trash"></i>
+      <% end %>
       <div class="feature-description box">
         <h2 class="subtitle"><%= feature.title %></h2>
         <p><%= feature.description %></p>
-        <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature', remote: true %>
+
       </div>
       <div class="project-step-border-wall"></div>
       <%= link_to 'Add step', new_step_path(feature_id: feature.id), class: 'new-step-link', remote: true %>
       <div class="step-list">
         <% feature.steps.sort_by{|step| step.done ? 0 : 1}.each do |step| %>
 
+            <%= link_to check_step_path(step), method: :patch do %>
+              <input type="checkbox" <%= step.done ? "checked='checked'" : '' %>>
+            <% end %>
 
-              <%= link_to step_path(step), method: :patch do %>
-                <input type="checkbox" <%= step.done ? "checked='checked'" : '' %>>
-              <% end %>
+            <span class="<%= 'done-step' if step.done %>"><%=step.title %></span>
+            &nbsp;
+            <%= link_to edit_step_path(step), remote: true do %>
+                <i class="fa fa-edit step-icon"></i>
+            <% end %>
 
-              <span class="<%= 'done-step' if step.done %>"><%=step.title %></span>
-
-              <%= link_to '', step_path(step), method: :delete, class: 'delete is-small', data: {confirm: 'are you sure?'} %>
+            <%= link_to step_path(step), method: :delete, data: {confirm: 'are you sure?'} do %>
+                <i style="position:relative;bottom:1px;" class="fa fa-trash step-icon"></i>
+            <% end %>
 
             <br />
         <% end %>

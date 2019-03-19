@@ -1,5 +1,5 @@
 class StepsController < ApplicationController
-  before_action :set_step, only: [:destroy, :update]
+  before_action :set_step, only: [:destroy, :update, :edit, :check_step]
   def new
     @step = Step.new(feature_id: params[:feature_id])
   end
@@ -11,10 +11,19 @@ class StepsController < ApplicationController
     redirect_to @step.feature.project
   end
 
-  def update
+  def edit
+  end
+
+  def check_step
     is_done = (@step.done ? false : true) #reverse it from whatever it currently is
     @step.update(done: is_done)
     flash[:notice] = is_done ? 'Nice! Keep it up' : 'Right back at \'em'
+    redirect_to @step.feature.project
+  end
+
+  def update
+    @step.update(step_params)
+    flash[:notice] = 'step updated'
     redirect_to @step.feature.project
   end
 

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :status_updates
   resources :notes
   resources :steps
+  patch '/check_step', to: 'steps#check_step', as: 'check_step'
   resources :features
 
   resources :projects
