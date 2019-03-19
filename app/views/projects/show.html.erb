@@ -24,6 +24,9 @@
     padding-left:2px;
     padding-top:6px;
   }
+  .done-step {
+    text-decoration:line-through;
+  }
   .project-step-border-wall {
     position:absolute;
     left:16%;
@@ -120,18 +123,16 @@
       <%= link_to 'Add step', new_step_path(feature_id: feature.id), class: 'new-step-link', remote: true %>
       <div class="step-list">
         <% feature.steps.sort_by{|step| step.done ? 0 : 1}.each do |step| %>
-            <label class="checkbox">
+
+
               <%= link_to step_path(step), method: :patch do %>
-                  <% if step.done %>
-                      <input type="checkbox" checked="checked">
-                      <span style="text-decoration:line-through"><%= step.title %></span>
-                  <% else %>
-                      <input type="checkbox">
-                      <%= step.title %>
-                  <% end %>
+                <input type="checkbox" <%= step.done ? "checked='checked'" : '' %>>
               <% end %>
-            </label>
-            <%= link_to '', step_path(step), method: :delete, class: 'delete is-small', data: {confirm: 'are you sure?'} %>
+
+              <span class="<%= 'done-step' if step.done %>"><%=step.title %></span>
+
+              <%= link_to '', step_path(step), method: :delete, class: 'delete is-small', data: {confirm: 'are you sure?'} %>
+
             <br />
         <% end %>
       </div>
