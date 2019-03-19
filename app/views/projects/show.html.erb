@@ -130,7 +130,7 @@
 
 <%= link_to 'back to dashboard', projects_path, class: 'back-to-dashboard button is-info' %>
 <%= link_to 'add task', new_feature_path(project_id: @project.id), class: 'button is-success add-task', remote: true %>
-<% @project.features.each do |feature| %>
+<% @features.each do |feature| %>
     <div style="background-color:<%= feature.color? ? feature.color : '' %>" class='feature-div'>
       <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature', remote: true %>
       <%= link_to feature_path(feature), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'destroy-feature has-text-danger' do %>

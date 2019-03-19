@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @features = @project.features.order(created_at: :asc)
   end
 
   def new
