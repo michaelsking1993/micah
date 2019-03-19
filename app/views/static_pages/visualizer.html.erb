@@ -1,0 +1,186 @@
+<style>
+  .feature-div {
+    height:200px;
+    background-color:lightgrey;
+    margin:20px;
+    position:relative;
+  }
+  .feature-description {
+    width: 15%;
+    height:92%;
+    position:relative;
+    top:4%;
+    margin:4px;
+    overflow-y:scroll;
+  }
+  .step-list {
+    width:25%;
+    height:100%;
+    overflow-y:scroll;
+    float:right;
+    position:absolute;
+    left:17%;
+    top:0;
+    padding-left:2px;
+    padding-top:6px;
+  }
+  .project-step-border-wall {
+    position:absolute;
+    left:16%;
+    width:3px;
+    height:100%;
+    background-color:black;
+    top:0;
+  }
+  .step-status-border-wall {
+    position:absolute;
+    left:42.4%;
+    width:2px;
+    height:100%;
+    background-color:darkgrey;
+    top:0;
+  }
+  .status-updates {
+    position:absolute;
+    top:0;
+    left:42.6%;
+    height:100%;
+    overflow-x:scroll;
+  }
+  .status-update {
+    left:0.6%;
+    position:relative;
+    width:200px;
+    height:90%;
+    top:4%;
+    float:left;
+    margin-right:8px;
+    word-wrap:break-word;
+    overflow-y:scroll;
+  }
+  .new-update-link {
+    position:absolute;
+    left:43%;
+    bottom:-12%;
+  }
+  .new-step-link {
+    position:absolute;
+    left:16.6%;
+    bottom:-12%;
+  }
+
+  .status-time {
+    position:absolute;
+    top:0;
+    right:0;
+    font-size:12px;
+  }
+</style>
+<body>
+  <%= link_to 'add task', new_feature_path(project_id: @project.id) %>
+  <% @project.features.each do |feature| %>
+    <div class='feature-div'>
+      <div class="feature-description box">
+        <h2 class="subtitle"><%= feature.title %></h2>
+        <p><%= feature.description %></p>
+      </div>
+      <div class="project-step-border-wall"></div>
+      <%= link_to 'Add step', new_step_path, class: 'new-step-link' %>
+      <div class="step-list">
+        <% feature.steps.each do |step| %>
+            <label class="checkbox">
+              <%= link_to step_path(step), method: :patch do %>
+                  <input type="checkbox">
+                  <% if step.done %>
+                      <span style="text-decoration:line-through"><%= step.title %></span>
+                  <% else %>
+                      <%= step.title %>
+                  <% end %>
+              <% end %>
+            </label>
+            <br />
+        <% end %>
+      </div>
+      <div class="step-status-border-wall"></div>
+      <%= link_to 'New status', new_status_update_path, class: 'new-update-link' %>
+      <div class="status-updates">
+        <% feature.status_updates.order(created_at: :desc).each do |status_update| %>
+            <div class="box status-update">
+              <span class="status-time"><%= status_update.created_at.strftime("%B %e,%l:%M %p") %></span>
+              <%= status_update.notes %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+    <div class='feature-div'>
+      <div class="feature-description box">
+        <h2 class="subtitle">Example task</h2>
+        <p>This is the example text. Some text.</p>
+      </div>
+      <div class="project-step-border-wall"></div>
+      <a class="new-step-link">Add step</a>
+      <div class="step-list">
+        <% (0..15).to_a.each do |num| %>
+            <label class="checkbox">
+              <input type="checkbox">
+              <% if [0, 2, 4].include?(num) %>
+                  Task <%= num %> I am a very long task
+              <% else %>
+                  <span style="text-decoration:line-through">Task <%= num %></span>
+              <% end %>
+            </label>
+            <br />
+
+        <% end %>
+      </div>
+      <div class="step-status-border-wall"></div>
+      <a class="new-update-link">New status</a>
+      <div class="status-updates">
+        <% (0..4).to_a.each do |num| %>
+            <div class="box status-update">
+              <span class="status-time">March 12th, 3:35pm</span>
+              hello. This is status update <%= num %>, with relevant notes.
+            </div>
+        <% end %>
+
+      </div>
+
+    </div>
+    <hr>
+    <div class='feature-div'>
+    <div class="feature-description box">
+      <h2 class="subtitle">Example task</h2>
+      <p>This is the example text. Some text.</p>
+    </div>
+    <div class="project-step-border-wall"></div>
+    <a class="new-step-link">Add step</a>
+    <div class="step-list">
+      <% (0..15).to_a.each do |num| %>
+          <label class="checkbox">
+            <input type="checkbox">
+            <% if [0, 2, 4].include?(num) %>
+                Task <%= num %> I am a very long task
+            <% else %>
+                <span style="text-decoration:line-through">Task <%= num %></span>
+            <% end %>
+          </label>
+          <br />
+
+      <% end %>
+    </div>
+    <div class="step-status-border-wall"></div>
+    <a class="new-update-link">New status</a>
+    <div class="status-updates">
+      <% (0..4).to_a.each do |num| %>
+          <div class="box status-update">
+            <span class="status-time">March 12th, 3:35pm</span>
+            hello. This is status update <%= num %>, with relevant notes.
+          </div>
+      <% end %>
+
+    </div>
+
+  </div>
+  <% end %>
+</body>

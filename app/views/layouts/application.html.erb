@@ -9,6 +9,20 @@
   </head>
 
   <body>
+  <% flash.each do |message_type, message| %>
+      <div class="isa_<%= message_type %> flash-offset flash-message">
+        <%= message %>
+      </div>
+  <% end %>
+  <script type="text/javascript">
+      $( document ).on('turbolinks:load', function(){
+          setTimeout(function() {
+              $('[class^="isa_"]').fadeOut().empty();
+          }, 4000);
+      })
+  </script>
+  <!-- This makes it go away. comment if debugging   -->
     <%= yield %>
   </body>
 </html>
+

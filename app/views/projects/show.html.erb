@@ -1,4 +1,146 @@
 <style>
+  .feature-div {
+    height:200px;
+    background-color:lightgrey;
+    margin:20px;
+    position:relative;
+  }
+  .feature-description {
+    width: 15%;
+    height:92%;
+    position:relative;
+    top:4%;
+    margin:4px;
+    overflow-y:scroll;
+  }
+  .step-list {
+    width:25%;
+    height:100%;
+    overflow-y:scroll;
+    float:right;
+    position:absolute;
+    left:17%;
+    top:0;
+    padding-left:2px;
+    padding-top:6px;
+  }
+  .project-step-border-wall {
+    position:absolute;
+    left:16%;
+    width:3px;
+    height:100%;
+    background-color:black;
+    top:0;
+  }
+  .step-status-border-wall {
+    position:absolute;
+    left:42.4%;
+    width:2px;
+    height:100%;
+    background-color:darkgrey;
+    top:0;
+  }
+  .status-updates {
+    position:absolute;
+    top:0;
+    left:42.6%;
+    height:100%;
+    overflow-x:scroll;
+  }
+  .status-update {
+    left:0.6%;
+    position:relative;
+    width:200px;
+    height:90%;
+    top:4%;
+    float:left;
+    margin-right:8px;
+    word-wrap:break-word;
+    overflow-y:scroll;
+  }
+  .new-update-link {
+    position:absolute;
+    left:43%;
+    bottom:-12%;
+  }
+  .new-step-link {
+    position:absolute;
+    left:16.6%;
+    bottom:-12%;
+  }
+
+  .status-time {
+    position:absolute;
+    top:0;
+    right:0;
+    font-size:12px;
+  }
+
+  .add-task {
+    position:relative;
+    left:20px;
+    top:8px;
+  }
+
+  .edit-feature {
+    position:absolute;
+    top:0;
+    left:2%;
+    font-size:12px;
+  }
+
+  .edit-status-update {
+    position:absolute;
+    left:1%;
+    top:-1%;
+    font-size:12px;
+  }
+</style>
+<body>
+<%= link_to 'add task', new_feature_path(project_id: @project.id), class: 'button is-success add-task' %>
+<% @project.features.each do |feature| %>
+    <div style="background-color:<%= feature.color? ? feature.color : '' %>" class='feature-div'>
+      <div class="feature-description box">
+        <h2 class="subtitle"><%= feature.title %></h2>
+        <p><%= feature.description %></p>
+        <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature' %>
+      </div>
+      <div class="project-step-border-wall"></div>
+      <%= link_to 'Add step', new_step_path(feature_id: feature.id), class: 'new-step-link' %>
+      <div class="step-list">
+        <% feature.steps.sort_by{|step| step.done ? 0 : 1}.each do |step| %>
+            <label class="checkbox">
+              <%= link_to step_path(step), method: :patch do %>
+                  <% if step.done %>
+                      <input type="checkbox" checked="checked">
+                      <span style="text-decoration:line-through"><%= step.title %></span>
+                  <% else %>
+                      <input type="checkbox">
+                      <%= step.title %>
+                  <% end %>
+              <% end %>
+            </label>
+            <br />
+        <% end %>
+      </div>
+      <div class="step-status-border-wall"></div>
+      <%= link_to 'New status', new_status_update_path(feature_id: feature.id), class: 'new-update-link' %>
+      <div class="status-updates">
+        <% feature.status_updates.order(created_at: :desc).each do |status_update| %>
+            <div class="box status-update">
+              <span class="status-time"><%= status_update.created_at.strftime("%B %e,%l:%M %p") %></span>
+              <%= status_update.notes %>
+              <%= link_to 'edit', edit_status_update_path(status_update), class: 'edit-status-update' %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+    <hr>
+<% end %>
+</body>
+
+<!--
+<style>
   .feature-container {
     height:240px;
     margin:20px;
@@ -16,54 +158,52 @@
   }
 </style>
 
-<h1 class="title"><%= @project.title %></h1>
-<h2 class="subtitle"><%= @project.description %></h2>
+<h1 class="title"><%#= @project.title %></h1>
+<h2 class="subtitle"><%#= @project.description %></h2>
 
-<%= link_to 'add task/feature', new_feature_path(project_id: @project.id) %><br /><br />
-<% @project.features.each do |feature| %>
+<%#= link_to 'add task/feature', new_feature_path(project_id: @project.id) %><br /><br />
+<%# @project.features.each do |feature| %>
     <div class="columns" style="background-color:grey;margin-bottom:32px;">
       <div class="card column is-2">
         <p class="subtitle has-text-weight-bold">
-          <%= feature.title %>
+          <%#= feature.title %>
         </p>
         <p>
-          <%= feature.description %>
+          <%#= feature.description %>
         </p>
       </div>
       <div class="column is-2">
-        <% feature.steps.each do |step| %>
+        <%# feature.steps.each do |step| %>
             <label class="checkbox">
-              <% if step.done %>
-                  <%= link_to step_path(step), method: :patch do %>
+              <%# if step.done %>
+                  <%#= link_to step_path(step), method: :patch do %>
                     <input type="checkbox" checked="checked">
-                  <% end %>
+                  <%# end %>
                   <span style="text-decoration:line-through;">
-                    <%= step.title %>
+                    <%#= step.title %>
                   </span>
-              <% else %>
-                  <%= link_to step_path(step), method: :patch do %>
+              <%# else %>
+                  <%#= link_to step_path(step), method: :patch do %>
                     <input type="checkbox">
-                  <% end %>
-                  <%= step.title %>
-              <% end %>
+                  <%# end %>
+                  <%#= step.title %>
+              <%# end %>
             </label>
             <br/>
-        <% end %>
-        <%= link_to 'add step', new_step_path(feature_id: feature.id) %>
+        <%# end %>
+        <%#= link_to 'add step', new_step_path(feature_id: feature.id) %>
       </div>
       <div class="column is-8 status-updates">
         <div class="box status-update">
-          <%= link_to 'new update', new_status_update_path(feature_id: feature.id) %>
+          <%#= link_to 'new update', new_status_update_path(feature_id: feature.id) %>
         </div>
-        <% feature.status_updates.order(created_at: :desc).each do |status_update| %>
+        <%# feature.status_updates.order(created_at: :desc).each do |status_update| %>
           <div class="box status-update">
-            <span style="position:absolute;top:0;right:0;font-size:12px;"><%=status_update.created_at.strftime("%B %e,%l:%M %p")%></span>
+            <span style="position:absolute;top:0;right:0;font-size:12px;"><%#=status_update.created_at.strftime("%B %e,%l:%M %p")%></span>
             <!--<h2 class="subtitle"><%#= status_update.title %></h2>-->
-            <p><%= status_update.notes %></p>
-          </div>
-        <% end %>
+            <%#= status_update.notes %>
+          <!--</div>
+        <%# end %>
       </div>
-    </div>
-
-
-<% end %>
+    </div>-->
+<%# end %>

@@ -11,5 +11,13 @@
 // about supported directives.
 //
 //= require rails-ujs
+//= require jquery
 //= require turbolinks
 //= require_tree .
+
+$(document).on('turbolinks:load', function(){
+    setTimeout(function() {
+        $('[class^="isa_"]').fadeOut().empty();
+    }, 4000);
+});
+

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'static_pages#splash'
-
+  get 'visualizer', to: 'static_pages#visualizer'
   resources :sessions, only: [:new, :create, :destroy]
 
   get 'signup', to: 'users#new', as: 'signup'

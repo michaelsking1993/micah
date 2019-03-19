@@ -1,0 +1,6 @@
+<%= simple_form_for @status_update do |f| %>
+    <%= f.input :title %>
+    <%= f.input :notes %>
+    <%= f.hidden_field :feature_id, value: @status_update.feature_id %>
+    <%= f.submit %>
+<% end %>

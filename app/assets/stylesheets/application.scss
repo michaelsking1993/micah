@@ -15,3 +15,67 @@
  */
 
 @import "bulma";
+@import "variables.scss";
+
+/* messages d'information */
+
+.isa_info, .isa_notice  {
+  color: $white;
+  background-color: $info-shade4;
+  span {
+    display: inline;
+  }
+  button {
+    margin-left: 20px;
+    background-color: $info-shade4;
+  }
+}
+
+/* messages de succès */
+
+.isa_success {
+  color: $success-shade4;
+  background-color: $success-shade2;
+}
+
+/* messages d'alerte */
+
+.isa_warning {
+  color: $warning-shade4;
+  background-color: $warning-shade2;
+}
+
+/* messages d'erreur */
+
+.isa_error, .isa_alert {
+  color: $error-shade4;
+  background-color: $error-shade2;
+}
+
+//FLASH MESSAGES. THIS IS WHY THEY SOMETIMES LOOK GOOD AND SOMETIMES LOOK BAD.
+// THE POSITION:ABSOLUTE IS BEING OVERRIDDEN SOMEWHERE
+
+.isa_info, .isa_success, .isa_warning, .isa_error, .isa_notice, .isa_alert {
+  width: 100%;
+  z-index: 9999999;
+  /*margin-top: $header-height;*/
+  padding: 6px 6px 6px 20px;
+  font-size: 0.92em;
+  opacity: 0.82;
+  span {
+    display: none;
+    position: absolute;
+    margin-bottom: 7px;
+    border: 1px solid;
+    border-radius: 50%;
+    padding: 3px 3px;
+    top: 45px;
+    width: 12px;
+    height: 17px;
+    right: 17px;
+    font-size: 0.6em;
+    transform: scale(1.5, 1);
+    -webkit-transform: scale(1.5, 1);
+    opacity: 1;
+  }
+}
