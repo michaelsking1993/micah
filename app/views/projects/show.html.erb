@@ -136,7 +136,7 @@
       <%= link_to feature_path(feature), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'destroy-feature has-text-danger' do %>
           <i class="destroy-feature-icon fa fa-trash"></i>
       <% end %>
-      <div class="feature-description box">
+      <div class="feature-description">
         <h2 class="subtitle"><%= feature.title %></h2>
         <p><%= feature.description %></p>
 
