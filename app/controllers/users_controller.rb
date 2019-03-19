@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       flash[:error] = 'something went wrong - try again'
       redirect_to new_user_path
     end
-
+=begin
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -42,6 +42,7 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+=end
   end
 
   # PATCH/PUT /users/1
