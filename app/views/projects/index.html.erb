@@ -34,7 +34,7 @@
         </div>
       </div>
       <footer class="card-footer">
-        <%= link_to 'Open', project_path(project), class: 'card-footer-item', remote: true %>
+        <%= link_to 'Open', project_path(project), class: 'card-footer-item' %>
         <%= link_to 'Edit', edit_project_path(project), class: 'card-footer-item', remote: true %>
         <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'card-footer-item' %>
       </footer>
