@@ -131,6 +131,7 @@
                   <% end %>
               <% end %>
             </label>
+            <%= link_to '', step_path(step), method: :delete, class: 'delete is-small', data: {confirm: 'are you sure?'} %>
             <br />
         <% end %>
       </div>
