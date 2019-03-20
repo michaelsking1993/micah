@@ -1,5 +1,5 @@
 class StepsController < ApplicationController
-  before_action :set_step, only: [:destroy, :update, :edit, :check_step]
+  before_action :set_step, only: [:destroy, :update, :edit]
   def new
     @step = Step.new(feature_id: params[:feature_id])
   end
@@ -15,6 +15,7 @@ class StepsController < ApplicationController
   end
 
   def check_step
+    @step = Step.includes(feature: [:project]).find(params[:step_id])
     is_done = (@step.done ? false : true) #reverse it from whatever it currently is
     @step.update(done: is_done)
     flash[:notice] = is_done ? 'Nice! Keep it up' : 'Right back at \'em'
