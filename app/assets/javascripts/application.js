@@ -12,12 +12,40 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require jquery-ui/widgets/accordion
 //= require turbolinks
 //= require_tree .
 
 $(document).on('turbolinks:load', function(){
+
+    //this removes the flash message banner after a few seconds.
     setTimeout(function() {
         $('[class^="isa_"]').fadeOut().empty();
     }, 4000);
+
+    $('#projects').accordion({
+        heightStyle: 'content',
+        active: '', //which index div should be shown open. '' if none.
+        collapsible: true
+    })
+
+/*
+    $('.conjugation-accordion-indicative').accordion({
+        heightStyle: "content",
+        active: active_indic,
+        collapsible: true
+    });
+    $('.conjugation-accordion-subjunctive').accordion({
+        heightStyle: "content",
+        active: active_subj,
+        collapsible: true
+    });
+    $('.conjugation-accordion-imperative').accordion({
+        heightStyle: "content",
+        active: active_imp,
+        collapsible: true
+    });
+    */
+
 });
 

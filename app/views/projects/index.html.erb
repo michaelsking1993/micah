@@ -4,40 +4,216 @@
     margin:20px;
   }
   .project-date {
-    position:absolute;
-    right:2%;
-    top:0;
-    font-size:14px;
+    position: absolute;
+    right: 2%;
+    top: 0;
+    font-size: 14px;
   }
+  .ui-accordion-header.ui-state-active, .ui-accordion-header.ui-state-focus {
+    background-color: aqua;
+    border: 1px solid black;
+  }
+    :focus {
+      outline-color:yellow;
+    }
+
+    /* start css copied from show.html.erb */
+
+  .feature-div {
+    height:200px;
+    background-color:lightgrey;
+    margin:20px;
+    position:relative;
+  }
+  .feature-description {
+    width: 15%;
+    height:88%;
+    position:relative;
+    top:10%;
+    margin:4px;
+    overflow-y:scroll;
+  }
+  .step-list {
+    width:25%;
+    height:100%;
+    overflow-y:scroll;
+    float:right;
+    position:absolute;
+    left:17%;
+    top:0;
+    padding-left:2px;
+    padding-top:6px;
+  }
+  .done-step {
+    text-decoration:line-through;
+  }
+  .project-step-border-wall {
+    position:absolute;
+    left:16%;
+    width:3px;
+    height:100%;
+    background-color:black;
+    top:0;
+  }
+  .step-status-border-wall {
+    position:absolute;
+    left:42.4%;
+    width:2px;
+    height:100%;
+    background-color:darkgrey;
+    top:0;
+  }
+  .status-updates {
+    position:absolute;
+    top:0;
+    left:42.6%;
+    height:100%;
+    overflow-x:scroll;
+  }
+  .status-update {
+    left:0.6%;
+    position:relative;
+    width:200px;
+    height:90%;
+    top:4%;
+    float:left;
+    margin-right:8px;
+    word-wrap:break-word;
+    overflow-y:scroll;
+  }
+  .new-update-link {
+    position:absolute;
+    left:43%;
+    bottom:-12%;
+  }
+  .new-step-link {
+    position:absolute;
+    left:16.6%;
+    bottom:-12%;
+  }
+
+  .status-time {
+    position:absolute;
+    top:0;
+    right:0;
+    font-size:12px;
+  }
+
+  .subtitle {
+    margin-bottom:4px !important;
+  }
+
+  .add-task {
+
+  }
+
+  .back-to-dashboard {
+    position:relative;
+    left:2%;
+    top:8px;
+  }
+
+  .edit-feature {
+    position:absolute;
+    top:-1px;
+    left:11.6%;
+    font-size:15px;
+  }
+
+  .destroy-feature {
+    position:absolute;
+    top:0;
+    left:1%;
+    font-size:12px;
+  }
+
+  .destroy-feature-icon {
+    font-size:16px;
+    position:relative;
+    top:2px;
+  }
+
+  .step-icon {
+    font-size:12px;
+  }
+
+  .edit-status-update {
+    position:absolute;
+    left:1%;
+    top:-1%;
+    font-size:12px;
+  }
+
 </style>
-
 <%= link_to 'new project', new_project_path, class: 'button is-success', style: 'margin:20px;margin-bottom:0px;' %>
+<ol class="is-size-6" style="list-style-type:circle;position:relative;left:25%;bottom:24px">
+  <li>All your projects are shown here.</li>
+  <li>Click the project header to expand it. All tasks/steps/statuses are nested inside.</li>
+  <li>Click the header again to collapse it (or simply click another header)</li>
+</ol>
+<div id="projects">
+  <% @projects.each do |project| %>
+      <h3 style="text-decoration:<%= project.done ? 'line-through' : '' %>" class="subtitle"><strong><%= project.title %></strong> (<%= project.created_at.strftime("%B %Y") %>) </h3>
+      <div style="position:relative;">
+        <h1 class="title has-text-centered"><%= project.title %></h1>
+        <h2 style="margin-bottom:0;" class="subtitle has-text-centered"><%= project.description || '[no description]' %></h2>
 
-<% @projects.each do |project| %>
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title">
-          <span style="text-decoration:<%= project.done ? 'line-through' : '' %>">
-             <%= project.title %>
-          </span>
-        </p>
-        <!--<a href="#" class="card-header-icon" aria-label="more options">
-          <span class="icon">
-            <i class="fas fa-angle-down" aria-hidden="true"></i>
-          </span>
-        </a>-->
-      </header>
-      <div class="card-content">
-        <div class="content">
-          <%= project.description %>
-          <time class="project-date" datetime="<%= project.created_at.strftime("%B %Y") %>"><%= project.created_at.strftime("%B %Y") %></time>
+        <%#= link_to 'Open in separate page', project_path(project), class: 'card-footer-item' %>
+        <div class="has-text-centered">
+          <%= link_to 'Edit', edit_project_path(project), class: 'has-text-info', remote: true %> |
+          <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'has-text-danger' %>
         </div>
+        <%= link_to 'add task', new_feature_path(project_id: project.id), class: 'button is-success add-task', remote: true %>
+        <% project.features.each do |feature| %>
+            <div style="background-color:<%= feature.color? ? feature.color : '' %>" class='feature-div'>
+              <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature', remote: true %>
+              <%= link_to feature_path(feature), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'destroy-feature has-text-danger' do %>
+                  <i class="destroy-feature-icon fa fa-trash"></i>
+              <% end %>
+              <div class="feature-description">
+                <h2 class="subtitle"><%= feature.title %></h2>
+                <p><%= feature.description %></p>
+
+              </div>
+              <div class="project-step-border-wall"></div>
+              <%= link_to 'Add step', new_step_path(feature_id: feature.id), class: 'new-step-link', remote: true %>
+              <div class="step-list">
+                <% feature.steps.sort_by{|step| step.created_at}.each do |step| %>
+
+                    <%= link_to check_step_path(step_id: step.id), method: :patch do %>
+                        <input type="checkbox" <%= step.done ? "checked='checked'" : '' %>>
+                    <% end %>
+
+                    <span class="<%= 'done-step' if step.done %>"><%=step.title %></span>
+                    &nbsp;
+                    <%= link_to edit_step_path(step), remote: true do %>
+                        <i class="fa fa-edit step-icon"></i>
+                    <% end %>
+
+                    <%= link_to step_path(step), method: :delete, data: {confirm: 'are you sure?'} do %>
+                        <i style="position:relative;bottom:1px;" class="fa fa-trash step-icon"></i>
+                    <% end %>
+
+                    <br />
+                <% end %>
+              </div>
+              <div class="step-status-border-wall"></div>
+              <%= link_to 'New status', new_status_update_path(feature_id: feature.id), class: 'new-update-link', remote: true %>
+              <div class="status-updates">
+                <% feature.status_updates.order(created_at: :desc).each do |status_update| %>
+                    <div class="box status-update">
+                      <span class="status-time"><%= status_update.created_at.strftime("%B %e,%l:%M %p") %></span>
+                      <%= status_update.notes %>
+                      <%= link_to 'edit', edit_status_update_path(status_update), class: 'edit-status-update', remote: true %>
+                    </div>
+                <% end %>
+              </div>
+            </div>
+            <hr>
+        <% end %>
       </div>
-      <footer class="card-footer">
-        <%= link_to 'Open', project_path(project), class: 'card-footer-item' %>
-        <%= link_to 'Edit', edit_project_path(project), class: 'card-footer-item', remote: true %>
-        <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'card-footer-item' %>
-      </footer>
-    </div>
-<% end %>
+  <% end %>
+</div>
+
+
 
