@@ -1,4 +1,4 @@
 class Project < ApplicationRecord
-  has_many :features, dependent: :delete_all
+  has_many :features, dependent: :destroy
   belongs_to :user, optional: true
 end
