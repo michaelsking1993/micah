@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77da8aa1-f92f-41a2-8b26-561e982ffdfa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/projects_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/projects_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/projects/index.html.erb" afterPath="$PROJECT_DIR$/app/views/projects/index.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/projects/show.html.erb" afterPath="$PROJECT_DIR$/app/views/projects/show.html.erb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
@@ -133,13 +130,13 @@
           <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.erb">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="388">
-                  <caret line="146" column="19" lean-forward="false" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
+                <state relative-caret-position="163">
+                  <caret line="146" column="55" lean-forward="false" selection-start-line="146" selection-start-column="55" selection-end-line="146" selection-end-column="55" />
                   <folding>
                     <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-                    <element signature="e#3349#3355#0#HTML" expanded="true" />
+                    <element signature="e#3347#3353#0#HTML" expanded="true" />
                     <element signature="n#style#0;n#i#1;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
-                    <marker date="1553034834616" expanded="false" signature="4988:5029" ph="..." />
+                    <marker date="1553054522129" expanded="false" signature="4986:5027" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -328,8 +325,8 @@
         <option value="$PROJECT_DIR$/config/routes.rb" />
         <option value="$PROJECT_DIR$/app/controllers/steps_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/projects/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/projects/show.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/projects_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/projects/show.html.erb" />
       </list>
     </option>
   </component>
@@ -717,12 +714,12 @@
       <option name="presentableId" value="Default" />
       <updated>1552793284458</updated>
       <workItem from="1552793285928" duration="2574000" />
-      <workItem from="1552797039388" duration="37443000" />
+      <workItem from="1552797039388" duration="37819000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40017000" />
+    <option name="totallyTimeSpent" value="40393000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="495" height="736" extended-state="0" />
@@ -1173,24 +1170,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="146" column="19" lean-forward="false" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="e#3349#3355#0#HTML" expanded="true" />
-            <element signature="n#style#0;n#i#1;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <marker date="1553034834616" expanded="false" signature="4988:5029" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/projects_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="146" column="55" lean-forward="false" selection-start-line="146" selection-start-column="55" selection-end-line="146" selection-end-column="55" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="e#3347#3353#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#i#1;n#div#2;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <marker date="1553054522129" expanded="false" signature="4986:5027" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

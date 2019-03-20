@@ -144,7 +144,7 @@
       <div class="project-step-border-wall"></div>
       <%= link_to 'Add step', new_step_path(feature_id: feature.id), class: 'new-step-link', remote: true %>
       <div class="step-list">
-        <% feature.steps.sort_by{|step| step.done ? 0 : 1}.each do |step| %>
+        <% feature.steps.sort_by{|step| step.created_at}.each do |step| %>
 
             <%= link_to check_step_path(step), method: :patch do %>
               <input type="checkbox" <%= step.done ? "checked='checked'" : '' %>>
