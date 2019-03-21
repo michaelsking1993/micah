@@ -7,7 +7,7 @@ class FeaturesController < ApplicationController
   def create
     @feature = Feature.new(feature_params)
     @feature.save
-    redirect_to @feature.project
+    redirect_to projects_path
   end
 
   def edit
@@ -16,11 +16,10 @@ class FeaturesController < ApplicationController
   def update
     @feature.update(feature_params)
     flash[:notice] = 'Task updated'
-    redirect_to @feature.project
+    redirect_to projects_path
   end
 
   def destroy
-    project = @feature.project
     @feature.destroy
     flash[:notice] = 'Task destroyed - on to the next one.'
     redirect_to projects_path

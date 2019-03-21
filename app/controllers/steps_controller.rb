@@ -25,11 +25,10 @@ class StepsController < ApplicationController
   def update
     @step.update(step_params)
     flash[:notice] = 'step updated'
-    redirect_to projects_path
+    redirect_to projects_path(step_id: @step.id)
   end
 
   def destroy
-    project = @step.feature.project
     @step.destroy
     flash[:notice] = 'Step removed'
     redirect_to projects_path
