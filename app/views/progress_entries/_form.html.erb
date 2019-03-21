@@ -1,0 +1,5 @@
+<%= simple_form_for @progress_entry do |f| %>
+    <%= f.input :body %>
+    <%= f.input :user_id, value: current_user.id %>
+    <%= f.input :project_id, value: @progress_entry.project_id %>
+<% end %>

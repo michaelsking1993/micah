@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'progress_entries/new'
+
+  get 'progress_entries/create'
+
+  get 'progress_entries/update'
+
+  get 'progress_entries/edit'
+
+  get 'progress_entries/destroy'
+
   root 'static_pages#splash'
   get 'visualizer', to: 'static_pages#visualizer'
   resources :sessions, only: [:new, :create, :destroy]
