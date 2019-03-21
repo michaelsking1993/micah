@@ -51,3 +51,10 @@ $(document).on('turbolinks:load', function(){
 
 });
 
+function renderFlashMessages(flash_type, flash_message){
+    let flash_html = "<div class='isa_" + flash_type + " flash-offset flash-message'>" + flash_message + "</div>";
+    $('.site-content').before(flash_html);
+    setTimeout(function() {
+        $('.isa_' + flash_type).fadeOut().empty();
+    }, 4000);
+}

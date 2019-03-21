@@ -3,7 +3,7 @@
       <input type="checkbox" <%= step.done ? "checked='checked'" : '' %>>
   <% end %>
 
-  <span class="<%= 'done-step' if step.done %>"><%=step.title %></span>
+  <span data-step-id="<%= step.id %>" contenteditable="true" class="<%= 'done-step' if step.done %>"><%=step.title %></span>
   &nbsp;
   <%= link_to edit_step_path(step), remote: true do %>
       <i class="fa fa-edit step-icon"></i>

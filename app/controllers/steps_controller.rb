@@ -1,5 +1,6 @@
 class StepsController < ApplicationController
   before_action :set_step, only: [:destroy, :update, :edit]
+  skip_before_action :verify_authenticity_token
   def new
     @step = Step.new(feature_id: params[:feature_id])
   end
@@ -23,9 +24,10 @@ class StepsController < ApplicationController
   end
 
   def update
-    @step.update(step_params)
-    flash[:notice] = 'step updated'
-    redirect_to projects_path(step_id: @step.id)
+    #@step.update(step_params)
+    @step.update(title: params['title'])
+    #flash[:notice] = 'step updated'
+    #redirect_to projects_path(step_id: @step.id)
   end
 
   def destroy

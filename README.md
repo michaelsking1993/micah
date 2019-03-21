@@ -1,24 +1,10 @@
-# README
+# Micah: your organizational assistant.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+App is running at micahtodo.herokuapp.com.
 
-Things you may want to cover:
+To see what the app does, make sure to add a project, the tasks needed to complete it, 
+and the steps for each of the tasks.
 
-* Ruby version
+Or, go to the website and read about it (or run it on your localhost).
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+No seed data necessary.
