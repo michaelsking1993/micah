@@ -1,7 +1,17 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   def index
-    @projects = current_user.projects.sort_by{|project| project.done ? 1 : 0 }
+    all_projects = current_user.projects.includes(features: [:steps, :status_updates])
+
+    done_projects, in_progress_projects = [], []
+
+    all_projects.each{|proj| proj.done ? done_projects.push(proj) : in_progress_projects.push(proj)}
+
+    done_projects.sort_by!{|proj| proj.created_at}
+    in_progress_projects.sort_by!{|proj| proj.created_at}
+
+    @projects = in_progress_projects + done_projects
+
   end
 
   def show

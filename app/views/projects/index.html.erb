@@ -169,7 +169,7 @@
           <%= link_to 'Add task', new_feature_path(project_id: project.id), class: 'has-text-success', remote: true %>
         </div>
 
-        <% project.features.each do |feature| %>
+        <% project.features.sort_by{|step| step.created_at}.each do |feature| %>
             <div style="background-color:<%= feature.color? ? feature.color : '' %>" class='feature-div'>
               <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature', remote: true %>
               <%= link_to feature_path(feature), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'destroy-feature has-text-danger' do %>
