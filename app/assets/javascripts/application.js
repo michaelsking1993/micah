@@ -27,7 +27,7 @@ $(document).on('turbolinks:load', function(){
     let active_project_index = $projects.data('active-project-index');
     $projects.accordion({
         heightStyle: 'content',
-        active: active_project_index, //which index div should be shown open. '' if none.
+        active: active_project_index == '' ? 0 : active_project_index, //which index div should be shown open. '' if none. For now, keep 1st open.
         collapsible: true
     })
 
