@@ -8,7 +8,6 @@ $ ->
     $(this).on 'blur', (event) ->
       event.stopImmediatePropagation();
       new_contents = $(this).text()
-      debugger;
       if new_contents != contents
         step_id = $(this).data('step-id')
         $.ajax
