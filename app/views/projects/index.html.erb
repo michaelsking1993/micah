@@ -31,12 +31,12 @@
     position:relative;
     top:10%;
     margin:4px;
-    overflow-y:scroll;
+    overflow-y:auto;
   }
   .step-list {
     width:25%;
     height:100%;
-    overflow-y:scroll;
+    overflow-y:auto;
     float:right;
     position:absolute;
     left:17%;
@@ -68,7 +68,7 @@
     top:0;
     left:42.6%;
     height:100%;
-    overflow-x:scroll;
+    overflow-x:auto;
   }
   .status-update {
     left:0.6%;
@@ -79,7 +79,7 @@
     float:left;
     margin-right:8px;
     word-wrap:break-word;
-    overflow-y:scroll;
+    overflow-y:auto;
   }
   .new-update-link {
     position:absolute;
@@ -144,6 +144,10 @@
     font-size:12px;
   }
 
+    .box:first-child {
+      margin-bottom:0;
+    }
+
 </style>
 <%= link_to 'new project', new_project_path, class: 'button is-success', style: 'margin:20px;margin-bottom:0px;' %>
 <ol class="is-size-6" style="list-style-type:circle;position:relative;left:25%;bottom:24px">
@@ -161,9 +165,10 @@
         <%#= link_to 'Open in separate page', project_path(project), class: 'card-footer-item' %>
         <div class="has-text-centered">
           <%= link_to 'Edit', edit_project_path(project), class: 'has-text-info', remote: true %> |
-          <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'has-text-danger' %>
+          <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'has-text-danger' %> |
+          <%= link_to 'Add task', new_feature_path(project_id: project.id), class: 'has-text-success', remote: true %>
         </div>
-        <%= link_to 'add task', new_feature_path(project_id: project.id), class: 'button is-success add-task', remote: true %>
+
         <% project.features.each do |feature| %>
             <div style="background-color:<%= feature.color? ? feature.color : '' %>" class='feature-div'>
               <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature', remote: true %>
