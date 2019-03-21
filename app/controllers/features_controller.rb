@@ -23,7 +23,7 @@ class FeaturesController < ApplicationController
     project = @feature.project
     @feature.destroy
     flash[:notice] = 'Task destroyed - on to the next one.'
-    redirect_to project
+    redirect_to projects_path
   end
 
   private
@@ -33,6 +33,6 @@ class FeaturesController < ApplicationController
   end
 
   def feature_params
-    params.require(:feature).permit(:title, :description, :color, :project_id)
+    params.require(:feature).permit(:title, :description, :color, :done, :project_id)
   end
 end

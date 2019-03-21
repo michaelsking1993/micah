@@ -155,68 +155,9 @@
   <li>Click the project header to expand it. All tasks/steps/statuses are nested inside.</li>
   <li>Click the header again to collapse it (or simply click another header)</li>
 </ol>
-<div id="projects">
-  <% @projects.each do |project| %>
-      <h3 style="text-decoration:<%= project.done ? 'line-through' : '' %>" class="subtitle"><strong><%= project.title %></strong> (<%= project.created_at.strftime("%B %Y") %>) </h3>
-      <div style="position:relative;">
-        <h1 class="title has-text-centered"><%= project.title %></h1>
-        <h2 style="margin-bottom:0;" class="subtitle has-text-centered"><%= project.description || '[no description]' %></h2>
-
-        <%#= link_to 'Open in separate page', project_path(project), class: 'card-footer-item' %>
-        <div class="has-text-centered">
-          <%= link_to 'Edit', edit_project_path(project), class: 'has-text-info', remote: true %> |
-          <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'has-text-danger' %> |
-          <%= link_to 'Add task', new_feature_path(project_id: project.id), class: 'has-text-success', remote: true %>
-        </div>
-
-        <% project.features.sort_by{|step| step.created_at}.each do |feature| %>
-            <div style="background-color:<%= feature.color? ? feature.color : '' %>" class='feature-div'>
-              <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature', remote: true %>
-              <%= link_to feature_path(feature), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'destroy-feature has-text-danger' do %>
-                  <i class="destroy-feature-icon fa fa-trash"></i>
-              <% end %>
-              <div class="feature-description">
-                <h2 class="subtitle"><%= feature.title %></h2>
-                <p><%= feature.description %></p>
-
-              </div>
-              <div class="project-step-border-wall"></div>
-              <%= link_to 'Add step', new_step_path(feature_id: feature.id), class: 'new-step-link', remote: true %>
-              <div class="step-list">
-                <% feature.steps.sort_by{|step| step.created_at}.each do |step| %>
-
-                    <%= link_to check_step_path(step_id: step.id), method: :patch do %>
-                        <input type="checkbox" <%= step.done ? "checked='checked'" : '' %>>
-                    <% end %>
-
-                    <span class="<%= 'done-step' if step.done %>"><%=step.title %></span>
-                    &nbsp;
-                    <%= link_to edit_step_path(step), remote: true do %>
-                        <i class="fa fa-edit step-icon"></i>
-                    <% end %>
-
-                    <%= link_to step_path(step), method: :delete, data: {confirm: 'are you sure?'} do %>
-                        <i style="position:relative;bottom:1px;" class="fa fa-trash step-icon"></i>
-                    <% end %>
-
-                    <br />
-                <% end %>
-              </div>
-              <div class="step-status-border-wall"></div>
-              <%= link_to 'New status', new_status_update_path(feature_id: feature.id), class: 'new-update-link', remote: true %>
-              <div class="status-updates">
-                <% feature.status_updates.order(created_at: :desc).each do |status_update| %>
-                    <div class="box status-update">
-                      <span class="status-time"><%= status_update.created_at.strftime("%B %e,%l:%M %p") %></span>
-                      <%= status_update.notes %>
-                      <%= link_to 'edit', edit_status_update_path(status_update), class: 'edit-status-update', remote: true %>
-                    </div>
-                <% end %>
-              </div>
-            </div>
-            <hr>
-        <% end %>
-      </div>
+<div id="projects" data-active-project-index="<%= @active_project_index %>">
+  <% @projects.each_with_index do |project, index| %>
+      <%= render 'projects/project', project: project, project_index: index %>
   <% end %>
 </div>
 

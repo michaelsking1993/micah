@@ -23,9 +23,11 @@ $(document).on('turbolinks:load', function(){
         $('[class^="isa_"]').fadeOut().empty();
     }, 4000);
 
-    $('#projects').accordion({
+    let $projects = $('#projects');
+    let active_project_index = $projects.data('active-project-index');
+    $projects.accordion({
         heightStyle: 'content',
-        active: '', //which index div should be shown open. '' if none.
+        active: active_project_index, //which index div should be shown open. '' if none.
         collapsible: true
     })
 

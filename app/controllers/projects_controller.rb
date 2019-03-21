@@ -12,6 +12,18 @@ class ProjectsController < ApplicationController
 
     @projects = in_progress_projects + done_projects
 
+    if params[:step_id].present?
+      step_id = params[:step_id].to_i
+      project = Step.includes(feature: [:project]).find(step_id).feature.project
+      @active_project_index = nil
+      @projects.each_with_index do |proj, index|
+        if proj.id == project.id
+          @active_project_index = index
+        end
+      end
+    else
+      @active_project_index = ''
+    end
   end
 
   def show
@@ -26,7 +38,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.save
     flash[:success] = 'Project created! Get to work.'
-    redirect_to @project
+    redirect_to projects_path
   end
 
   def edit

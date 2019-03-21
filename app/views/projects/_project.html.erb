@@ -1,0 +1,17 @@
+<h3 style="text-decoration:<%= project.done ? 'line-through' : '' %>" class="subtitle"><strong><%= project.title %></strong> (<%= project.created_at.strftime("%B %Y") %>) </h3>
+<div data-project-index="<%= project_index %>" style="position:relative;">
+  <h1 class="title has-text-centered"><%= project.title %></h1>
+  <h2 style="margin-bottom:0;" class="subtitle has-text-centered"><%= project.description || '[no description]' %></h2>
+
+  <%#= link_to 'Open in separate page', project_path(project), class: 'card-footer-item' %>
+  <div class="has-text-centered">
+    <%= link_to 'Edit', edit_project_path(project), class: 'has-text-info', remote: true %> |
+    <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'has-text-danger' %> |
+    <%= link_to 'Add task', new_feature_path(project_id: project.id), class: 'has-text-success', remote: true %>
+  </div>
+
+  <% sort_features(project.features).each_with_index do |feature, index| %>
+      <%= render 'features/feature', feature: feature, feature_index: index %>
+      <hr>
+  <% end %>
+</div>

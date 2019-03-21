@@ -1,0 +1,15 @@
+<div data-step-index="<%= step_index %>">
+  <%= link_to check_step_path(step_id: step.id), method: :patch do %>
+      <input type="checkbox" <%= step.done ? "checked='checked'" : '' %>>
+  <% end %>
+
+  <span class="<%= 'done-step' if step.done %>"><%=step.title %></span>
+  &nbsp;
+  <%= link_to edit_step_path(step), remote: true do %>
+      <i class="fa fa-edit step-icon"></i>
+  <% end %>
+
+  <%= link_to step_path(step), method: :delete, data: {confirm: 'are you sure?'} do %>
+      <i style="position:relative;bottom:1px;" class="fa fa-trash step-icon"></i>
+  <% end %>
+</div>
