@@ -1,9 +1,10 @@
 
 <%= link_to 'new project', new_project_path, class: 'button is-success', style: 'margin:20px;margin-bottom:0px;' %>
 <ol class="is-size-6" style="list-style-type:circle;position:relative;left:25%;bottom:24px">
-  <li>All your projects are shown here.</li>
-  <li>Click the project header to expand it. All tasks/steps/statuses are nested inside.</li>
-  <li>Click the header again to collapse it (or simply click another header)</li>
+  <li>All your projects are shown here. First project opened by default.</li>
+  <li>Click the project header to collapse it or expand it (or click another header, which will auto-collapse the first one).
+  <li>All tasks/steps/statuses are nested inside.</li>
+  <li>This is important so that you can visualize and keep track of what the steps are for each task. So make sure you keep things organized ;)</li>
 </ol>
 <div id="projects" data-active-project-index="<%= @active_project_index %>">
   <% @projects.each_with_index do |project, index| %>
