@@ -15,10 +15,10 @@ $ ->
           type: 'PATCH'
           dataType: 'json'
           data: {title:new_contents}
-          error: () ->
-            renderFlashMessages('error', 'something went wrong')
-          success: () ->
-            renderFlashMessages('success', 'step updated')
+          #error: () ->
+            #renderFlashMessages('error', 'something went wrong')
+          #success: () ->
+            #renderFlashMessages('success', 'step updated')
 
 
 

@@ -25,9 +25,17 @@ class StepsController < ApplicationController
 
   def update
     #@step.update(step_params)
-    @step.update(title: params['title'])
-    #flash[:notice] = 'step updated'
-    #redirect_to projects_path(step_id: @step.id)
+
+    #temporarily do it like this to allow for update through both routes.
+    #TODO: figure out how to format strong parmas from coffeescript/javascript (from ajax)
+    if params['title'].present?
+      @step.update(title: params['title'])
+    else
+      @step.update(step_params)
+    end
+
+    flash[:notice] = 'step updated'
+    redirect_to projects_path(step_id: @step.id)
   end
 
   def destroy
