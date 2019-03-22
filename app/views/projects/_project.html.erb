@@ -7,11 +7,8 @@
   <div class="has-text-centered">
     <%= link_to 'Edit', edit_project_path(project), class: 'has-text-info', remote: true %> |
     <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'has-text-danger' %> |
-    <%= link_to 'Add task', new_feature_path(project_id: project.id), class: 'has-text-success', remote: true %>
+    <%= link_to 'Add task', new_task_path(project_id: project.id), class: 'has-text-success', remote: true %>
   </div>
 
-  <% sort_tasks(project.features).each_with_index do |feature, index| %>
-      <%= render 'features/feature', feature: feature, feature_index: index %>
-      <hr>
-  <% end %>
+  <%= render 'tasks/sorted_tasks', tasks: project.tasks %>
 </div>

@@ -1,11 +1,11 @@
 <style>
-  .feature-div {
+  .task-div {
     height:200px;
     background-color:lightgrey;
     margin:20px;
     position:relative;
   }
-  .feature-description {
+  .task-description {
     width: 15%;
     height:88%;
     position:relative;
@@ -95,21 +95,21 @@
     top:8px;
   }
 
-  .edit-feature {
+  .edit-task {
     position:absolute;
     top:-1px;
     left:11.6%;
     font-size:15px;
   }
 
-  .destroy-feature {
+  .destroy-task {
     position:absolute;
     top:0;
     left:1%;
     font-size:12px;
   }
 
-  .destroy-feature-icon {
+  .destroy-task-icon {
     font-size:16px;
     position:relative;
     top:2px;
@@ -133,22 +133,22 @@
 <body>
 
 <%= link_to 'back to dashboard', projects_path, class: 'back-to-dashboard button is-info' %>
-<%= link_to 'add task', new_feature_path(project_id: @project.id), class: 'button is-success add-task', remote: true %>
-<% @features.each do |feature| %>
-    <div style="background-color:<%= feature.color? ? feature.color : '' %>" class='feature-div'>
-      <%= link_to 'edit', edit_feature_path(feature), class: 'edit-feature', remote: true %>
-      <%= link_to feature_path(feature), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'destroy-feature has-text-danger' do %>
-          <i class="destroy-feature-icon fa fa-trash"></i>
+<%= link_to 'add task', new_task_path(project_id: @project.id), class: 'button is-success add-task', remote: true %>
+<% @tasks.each do |task| %>
+    <div style="background-color:<%= task.color? ? task.color : '' %>" class='task-div'>
+      <%= link_to 'edit', edit_task_path(task), class: 'edit-task', remote: true %>
+      <%= link_to task_path(task), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'destroy-task has-text-danger' do %>
+          <i class="destroy-task-icon fa fa-trash"></i>
       <% end %>
-      <div class="feature-description">
-        <h2 class="subtitle"><%= feature.title %></h2>
-        <p><%= feature.description %></p>
+      <div class="task-description">
+        <h2 class="subtitle"><%= task.title %></h2>
+        <p><%= task.description %></p>
 
       </div>
       <div class="project-step-border-wall"></div>
-      <%= link_to 'Add step', new_step_path(feature_id: feature.id), class: 'new-step-link', remote: true %>
+      <%= link_to 'Add step', new_step_path(task_id: task.id), class: 'new-step-link', remote: true %>
       <div class="step-list">
-        <% feature.steps.sort_by{|step| step.created_at}.each do |step| %>
+        <% task.steps.sort_by{|step| step.created_at}.each do |step| %>
 
             <%= link_to check_step_path(step_id: step.id), method: :patch do %>
               <input type="checkbox" <%= step.done ? "checked='checked'" : '' %>>
@@ -168,9 +168,9 @@
         <% end %>
       </div>
       <div class="step-status-border-wall"></div>
-      <%= link_to 'New status', new_status_update_path(feature_id: feature.id), class: 'new-update-link', remote: true %>
+      <%= link_to 'New status', new_status_update_path(task_id: task.id), class: 'new-update-link', remote: true %>
       <div class="status-updates">
-        <% feature.status_updates.order(created_at: :desc).each do |status_update| %>
+        <% task.status_updates.order(created_at: :desc).each do |status_update| %>
             <div class="box status-update">
               <span class="status-time"><%= status_update.created_at.strftime("%B %e,%l:%M %p") %></span>
               <%= status_update.notes %>
@@ -185,7 +185,7 @@
 
 <!--
 <style>
-  .feature-container {
+  .task-container {
     height:240px;
     margin:20px;
   }
@@ -205,19 +205,19 @@
 <h1 class="title"><%#= @project.title %></h1>
 <h2 class="subtitle"><%#= @project.description %></h2>
 
-<%#= link_to 'add task/feature', new_feature_path(project_id: @project.id) %><br /><br />
-<%# @project.features.each do |feature| %>
+<%#= link_to 'add task/task', new_task_path(project_id: @project.id) %><br /><br />
+<%# @project.tasks.each do |task| %>
     <div class="columns" style="background-color:grey;margin-bottom:32px;">
       <div class="card column is-2">
         <p class="subtitle has-text-weight-bold">
-          <%#= feature.title %>
+          <%#= task.title %>
         </p>
         <p>
-          <%#= feature.description %>
+          <%#= task.description %>
         </p>
       </div>
       <div class="column is-2">
-        <%# feature.steps.each do |step| %>
+        <%# task.steps.each do |step| %>
             <label class="checkbox">
               <%# if step.done %>
                   <%#= link_to step_path(step), method: :patch do %>
@@ -235,13 +235,13 @@
             </label>
             <br/>
         <%# end %>
-        <%#= link_to 'add step', new_step_path(feature_id: feature.id) %>
+        <%#= link_to 'add step', new_step_path(task_id: task.id) %>
       </div>
       <div class="column is-8 status-updates">
         <div class="box status-update">
-          <%#= link_to 'new update', new_status_update_path(feature_id: feature.id) %>
+          <%#= link_to 'new update', new_status_update_path(task_id: task.id) %>
         </div>
-        <%# feature.status_updates.order(created_at: :desc).each do |status_update| %>
+        <%# task.status_updates.order(created_at: :desc).each do |status_update| %>
           <div class="box status-update">
             <span style="position:absolute;top:0;right:0;font-size:12px;"><%#=status_update.created_at.strftime("%B %e,%l:%M %p")%></span>
             <!--<h2 class="subtitle"><%#= status_update.title %></h2>-->

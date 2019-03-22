@@ -1,20 +1,12 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   def index
-    all_projects = current_user.projects.includes(features: [:steps, :status_updates])
+    @projects = current_user.my_sorted_projects
 
-    done_projects, in_progress_projects = [], []
-
-    all_projects.each{|proj| proj.done ? done_projects.push(proj) : in_progress_projects.push(proj)}
-
-    done_projects.sort_by!{|proj| proj.created_at}
-    in_progress_projects.sort_by!{|proj| proj.created_at}
-
-    @projects = in_progress_projects + done_projects
-
+    @now_tasks = @projects.flat_map(&:tasks).select(&:do_this_now)
     if params[:step_id].present?
       step_id = params[:step_id].to_i
-      project = Step.includes(feature: [:project]).find(step_id).feature.project
+      project = Step.includes(task: [:project]).find(step_id).task.project
       @active_project_index = nil
       @projects.each_with_index do |proj, index|
         if proj.id == project.id
@@ -27,7 +19,7 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @features = @project.features.order(created_at: :asc)
+    @tasks = @project.tasks.order(created_at: :asc)
   end
 
   def new

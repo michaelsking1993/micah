@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190322203907) do
+ActiveRecord::Schema.define(version: 20190322210025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(version: 20190322203907) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "feature_id"
-    t.index ["feature_id"], name: "index_status_updates_on_feature_id"
+    t.bigint "task_id"
+    t.index ["task_id"], name: "index_status_updates_on_task_id"
   end
 
   create_table "steps", force: :cascade do |t|
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20190322203907) do
     t.boolean "done"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "feature_id"
-    t.index ["feature_id"], name: "index_steps_on_feature_id"
+    t.bigint "task_id"
+    t.index ["task_id"], name: "index_steps_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20190322203907) do
   add_foreign_key "progress_entries", "projects"
   add_foreign_key "progress_entries", "users"
   add_foreign_key "projects", "users"
-  add_foreign_key "status_updates", "tasks", column: "feature_id"
-  add_foreign_key "steps", "tasks", column: "feature_id"
+  add_foreign_key "status_updates", "tasks"
+  add_foreign_key "steps", "tasks"
   add_foreign_key "tasks", "projects"
 end

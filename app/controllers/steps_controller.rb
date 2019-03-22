@@ -2,7 +2,7 @@ class StepsController < ApplicationController
   before_action :set_step, only: [:destroy, :update, :edit]
   skip_before_action :verify_authenticity_token
   def new
-    @step = Step.new(feature_id: params[:feature_id])
+    @step = Step.new(task_id: params[:task_id])
   end
 
   def create
@@ -48,6 +48,6 @@ class StepsController < ApplicationController
   end
 
   def step_params
-    params.require(:step).permit(:title, :description, :done, :feature_id)
+    params.require(:step).permit(:title, :description, :done, :task_id)
   end
 end

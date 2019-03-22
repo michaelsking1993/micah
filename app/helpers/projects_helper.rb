@@ -1,12 +1,12 @@
 module ProjectsHelper
 
-  def sort_tasks(features)
-    done_features, in_progress_features = [], []
-    features.each{|feature| feature.done ? done_features.push(feature) : in_progress_features.push(feature)}
+  def sort_tasks(tasks)
+    done_tasks, in_progress_tasks = [], []
+    tasks.each{|task| task.done ? done_tasks.push(task) : in_progress_tasks.push(task)}
 
-    done_features.sort_by!(&:created_at)
-    in_progress_features.sort_by!(&:created_at)
+    done_tasks.sort_by!(&:created_at)
+    in_progress_tasks.sort_by!(&:created_at)
 
-    in_progress_features + done_features
+    in_progress_tasks + done_tasks
   end
 end

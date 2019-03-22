@@ -22,13 +22,13 @@
 
 /* start css copied from show.html.erb */
 
-.feature-div {
+.task-div {
   height:200px;
   background-color:lightgrey;
   margin:20px;
   position:relative;
 }
-.feature-description {
+.task-description {
   width: 15%;
   height:88%;
   position:relative;
@@ -116,21 +116,21 @@
   top:8px;
 }
 
-.edit-feature {
+.edit-task {
   position:absolute;
   top:-1px;
   left:11.6%;
   font-size:15px;
 }
 
-.destroy-feature {
+.destroy-task {
   position:absolute;
   top:0;
   left:1%;
   font-size:12px;
 }
 
-.destroy-feature-icon {
+.destroy-task-icon {
   font-size:16px;
   position:relative;
   top:2px;

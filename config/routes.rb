@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :notes
   resources :steps
   patch '/check_step', to: 'steps#check_step', as: 'check_step'
-  resources :features
+  resources :tasks
 
   resources :projects
 

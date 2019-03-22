@@ -2,7 +2,7 @@ class StatusUpdatesController < ApplicationController
   before_action :set_status_update, only: [:update, :edit]
 
   def new
-    @status_update = StatusUpdate.new(feature_id: params[:feature_id])
+    @status_update = StatusUpdate.new(task_id: params[:task_id])
   end
 
   def create
@@ -27,6 +27,6 @@ class StatusUpdatesController < ApplicationController
   end
 
   def status_update_params
-    params.require(:status_update).permit(:title, :notes, :feature_id)
+    params.require(:status_update).permit(:title, :notes, :task_id)
   end
 end
