@@ -1,3 +1,3 @@
 class StatusUpdate < ApplicationRecord
-  belongs_to :feature
+  belongs_to :task
 end

@@ -1,6 +1,6 @@
 module ProjectsHelper
 
-  def sort_features(features)
+  def sort_tasks(features)
     done_features, in_progress_features = [], []
     features.each{|feature| feature.done ? done_features.push(feature) : in_progress_features.push(feature)}
 

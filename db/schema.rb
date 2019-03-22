@@ -10,21 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190319024357) do
+ActiveRecord::Schema.define(version: 20190322203907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "features", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.boolean "done"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "project_id"
-    t.string "color"
-    t.index ["project_id"], name: "index_features_on_project_id"
-  end
 
   create_table "notes", force: :cascade do |t|
     t.string "title"
@@ -33,6 +22,16 @@ ActiveRecord::Schema.define(version: 20190319024357) do
     t.datetime "updated_at", null: false
     t.bigint "step_id"
     t.index ["step_id"], name: "index_notes_on_step_id"
+  end
+
+  create_table "progress_entries", force: :cascade do |t|
+    t.text "body"
+    t.bigint "project_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_progress_entries_on_project_id"
+    t.index ["user_id"], name: "index_progress_entries_on_user_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -73,6 +72,18 @@ ActiveRecord::Schema.define(version: 20190319024357) do
     t.index ["feature_id"], name: "index_steps_on_feature_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.boolean "done"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "project_id"
+    t.string "color"
+    t.boolean "do_this_now"
+    t.index ["project_id"], name: "index_tasks_on_project_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -83,9 +94,11 @@ ActiveRecord::Schema.define(version: 20190319024357) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "features", "projects"
   add_foreign_key "notes", "steps"
+  add_foreign_key "progress_entries", "projects"
+  add_foreign_key "progress_entries", "users"
   add_foreign_key "projects", "users"
-  add_foreign_key "status_updates", "features"
-  add_foreign_key "steps", "features"
+  add_foreign_key "status_updates", "tasks", column: "feature_id"
+  add_foreign_key "steps", "tasks", column: "feature_id"
+  add_foreign_key "tasks", "projects"
 end

@@ -10,7 +10,7 @@
     <%= link_to 'Add task', new_feature_path(project_id: project.id), class: 'has-text-success', remote: true %>
   </div>
 
-  <% sort_features(project.features).each_with_index do |feature, index| %>
+  <% sort_tasks(project.features).each_with_index do |feature, index| %>
       <%= render 'features/feature', feature: feature, feature_index: index %>
       <hr>
   <% end %>

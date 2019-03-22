@@ -1,11 +1,19 @@
 
 <%= link_to 'new project', new_project_path, class: 'button is-success', style: 'margin:20px;margin-bottom:0px;' %>
 <ol class="is-size-6" style="list-style-type:circle;position:relative;left:25%;bottom:24px">
-  <li>All your projects are shown here. First project opened by default.</li>
+  <li>All your projects are shown here. Things marked as "now" are opened by default.</li>
   <li>Click the project header to collapse it or expand it (or click another header, which will auto-collapse the first one).
   <li>All tasks/steps/statuses are nested inside.</li>
   <li>This is important so that you can visualize and keep track of what the steps are for each task. So make sure you keep things organized ;)</li>
 </ol>
+<div id="do-this-now-stuff">
+  <%= sort_tasks@now_tasks.each do |now_task| %>
+      <% sort_tasks(project.features).each_with_index do |feature, index| %>
+          <%= render 'features/feature', feature: feature, feature_index: index %>
+          <hr>
+      <% end %>
+  <% end %>
+</div>
 <div id="projects" data-active-project-index="<%= @active_project_index %>">
   <% @projects.each_with_index do |project, index| %>
       <%= render 'projects/project', project: project, project_index: index %>
