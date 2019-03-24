@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :validate_user
   def index
     @projects = current_user.my_sorted_projects
-
     @now_tasks = @projects.flat_map(&:tasks).select(&:do_this_now)
     if params[:step_id].present?
       step_id = params[:step_id].to_i
@@ -54,6 +54,13 @@ class ProjectsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:id])
+  end
+
+  def validate_user
+    unless @current_user
+      flash[:notice] = 'Sign up or login to access that page'
+      redirect_to root_path
+    end
   end
 
   def project_params
