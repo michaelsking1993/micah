@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
   end
 
   def validate_user
-    unless @current_user
+    unless current_user
       flash[:notice] = 'Sign up or login to access that page'
       redirect_to root_path
     end
