@@ -3,6 +3,11 @@ class StatusUpdatesController < ApplicationController
 
   def new
     @status_update = StatusUpdate.new(task_id: params[:task_id])
+    @title = 'New Note'
+    @form_path = 'status_updates/form'
+    respond_to do |format|
+      format.js { render file: 'layouts/form' }
+    end
   end
 
   def create
@@ -12,6 +17,11 @@ class StatusUpdatesController < ApplicationController
   end
 
   def edit
+    @title = 'Edit Note'
+    @form_path = 'status_updates/form'
+    respond_to do |format|
+      format.js { render file: 'layouts/form' }
+    end
   end
 
   def update

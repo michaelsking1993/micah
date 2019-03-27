@@ -15,6 +15,7 @@ $ ->
         type: 'PATCH'
         dataType: 'json'
         data: {title:new_contents}
+
 #error: () ->
 #renderFlashMessages('error', 'something went wrong')
 #success: () ->

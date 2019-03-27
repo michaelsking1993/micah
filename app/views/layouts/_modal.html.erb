@@ -2,7 +2,7 @@
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="has-text-centered modal-card-title">Modal title</p>
+      <p class="has-text-centered modal-card-title"><%= @title %></p>
       <button class="delete close-modal" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
@@ -13,9 +13,7 @@
       <button class="button">Submit</button>
     </footer>-->
   </div>
-  <script type="text/javascript">
-      $('.close-modal').click(function(){
-          $('#modal-dialog').remove();
-      });
-  </script>
+
+  <%= render 'layouts/add_modal_javascript' %>
+
 </div>

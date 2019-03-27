@@ -1,0 +1,11 @@
+<script type="text/javascript">
+
+    let $modal_dialog = $('#modal-dialog');
+    $('html').addClass('is-clipped')
+    $modal_dialog.addClass('is-active');
+    $modal_dialog.find('.modal-card-body').html("<%= j render @form_path %>");
+    $('.close-modal').click(function(){
+        $('html').removeClass('is-clipped');
+        $modal_dialog.remove();
+    })
+</script>

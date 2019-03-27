@@ -17,10 +17,31 @@
 !/log/.keep
 !/tmp/.keep
 
+# ignore the workspace settings of RubyMine
+.idea/*
+.idea
+/.idea
+/.idea/*
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore RubyMine project files
+.idea
+
+# and other stuff
+.byebug_history
+.DS_Store
+
+#ignore database.yml to allow for separate local databases with multiple devs working on project
+/config/database.yml
+config/database.yml
+/database.yml
+database.yml
+
+#igonore image local
+/public/uploads/*
+public/uploads/*
+
 /node_modules
 /yarn-error.log
-/.idea/workspace.xml
-
-/.idea/.workspace
-
-.byebug_history

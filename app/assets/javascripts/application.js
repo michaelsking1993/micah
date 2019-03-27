@@ -23,8 +23,10 @@ $(document).on('turbolinks:load', function(){
         $('[class^="isa_"]').fadeOut().empty();
     }, 4000);
 
+    changeTabsListener()
+
     let $projects = $('#projects');
-    let active_project_index = $projects.data('active-project-index');
+   // let active_project_index = $projects.data('active-project-index');
     $projects.accordion({
         heightStyle: 'content',
         active: '', //active_project_index == '' ? 0 : active_project_index, //which index div should be shown open. '' if none. For now, keep 1st open.
@@ -57,4 +59,24 @@ function renderFlashMessages(flash_type, flash_message){
     setTimeout(function() {
         $('.isa_' + flash_type).fadeOut().empty();
     }, 4000);
+}
+
+function changeTabsListener(){
+    $('[id$="-link"]').click(function() {
+        changeTabs(this);
+    });
+}
+function changeTabs(clicked_tab){
+    let tabs = $(clicked_tab).closest('ul').find('li');
+
+    $.each(tabs, function(i, tab){
+        $(tab).removeClass('is-active');
+        let content_id = $(tab).attr('id').replace('-link', '');
+        $('#' + content_id).css('display', 'none');
+    });
+
+    $(clicked_tab).addClass('is-active');
+
+    let id_to_show = $(clicked_tab).attr('id').replace('-link', '');
+    $('#' + id_to_show).show();
 }

@@ -1,9 +1,26 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :validate_user
+
+
+  def dashboard
+
+  end
+
+  def team
+    #TEMPORARILY HARDCODE COCOMIO
+    #TODO: this will throw an error on local databases. Make this change.
+    @project = Project.find_by(title: 'CocoMío')
+    #get other projects through CocoMío owner for now...
+    @now_goals = @project.tasks.select(&:now)
+    @projects = Project.all
+
+  end
+
+
   def index
     @projects = current_user.my_sorted_projects
-    @now_tasks = @projects.flat_map(&:tasks).select(&:do_this_now)
+    @now_tasks = @projects.flat_map(&:tasks).select(&:now)
     if params[:step_id].present?
       step_id = params[:step_id].to_i
       project = Step.includes(task: [:project]).find(step_id).task.project
@@ -24,6 +41,11 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @title = 'New Project'
+    @form_path = 'projects/form'
+    respond_to do |format|
+      format.js { render file: 'layouts/form' }
+    end
   end
 
   def create
@@ -34,6 +56,11 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @title = 'Edit Project'
+    @form_path = 'projects/form'
+    respond_to do |format|
+      format.js { render file: 'layouts/form' }
+    end
   end
 
   def update
@@ -47,7 +74,6 @@ class ProjectsController < ApplicationController
     flash[:notice] = 'Project destroyed'
     redirect_to projects_path
   end
-
 
 
   private

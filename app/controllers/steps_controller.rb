@@ -3,6 +3,11 @@ class StepsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def new
     @step = Step.new(task_id: params[:task_id])
+    @title = 'New Step'
+    @form_path = 'steps/form'
+    respond_to do |format|
+      format.js { render file: 'layouts/form' }
+    end
   end
 
   def create
@@ -13,6 +18,11 @@ class StepsController < ApplicationController
   end
 
   def edit
+    @title = 'Edit Step'
+    @form_path = 'steps/form'
+    respond_to do |format|
+      format.js { render file: 'layouts/form' }
+    end
   end
 
   def check_step

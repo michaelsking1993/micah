@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
+#dashboard-question-circle {
+  position: relative;
+  left:49.8%;
+  top:0%;
+  &:hover {
+    cursor:pointer;
+  }
+}
+
 .card {
   width:30%;
   margin:20px;

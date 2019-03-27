@@ -2,6 +2,11 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:edit, :update, :destroy]
   def new
     @task = Task.new(project_id: params[:project_id])
+    @title = 'New Task'
+    @form_path = 'tasks/form'
+    respond_to do |format|
+      format.js { render file: 'layouts/form' }
+    end
   end
 
   def create
@@ -11,6 +16,11 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @title = 'Edit Task'
+    @form_path = 'tasks/form'
+    respond_to do |format|
+      format.js { render file: 'layouts/form' }
+    end
   end
 
   def update
@@ -32,6 +42,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :color, :done, :do_this_now, :project_id)
+    params.require(:task).permit(:title, :description, :color, :done, :now, :project_id)
   end
 end

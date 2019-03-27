@@ -1,31 +1,60 @@
 
-<section class="container">
-  <%= link_to 'new project', new_project_path, class: 'button is-success', style: 'margin:20px;margin-bottom:0px;' %>
-  <ol class="is-size-6" style="list-style-type:circle;position:relative;left:25%;bottom:24px">
-    <li>All your projects are shown here. Things marked as "now" are opened by default.</li>
-    <li>Click the project header to collapse it or expand it (or click another header, which will auto-collapse the first one).
-    <li>All tasks/steps/statuses are nested inside.</li>
-    <li>Make a keyboard shortcut to auto-open your tasks from anywhere on your computer.</li>
-  </ol>
-  <div id="do-this-now-stuff">
-    <h1 class="title has-text-centered">
-      Stuff for right now
-    </h1>
-    <%= render 'tasks/sorted_tasks', tasks: @now_tasks %>
-  </div>
-</section>
-<br /><br />
-<section class="container">
-  <h1 class="title has-text-centered">
-    Other stuff
-  </h1>
-  <div id="projects" data-active-project-index="<%= @active_project_index %>">
-    <% @projects.each_with_index do |project, index| %>
-        <%= render 'projects/project', project: project, project_index: index %>
-    <% end %>
+  <div id="tabs" class="tabs is-centered is-boxed is-medium">
+    <ul>
+      <li id="mío-link" class="is-active">
+        <a>
+          <span class="icon is-small"><i class="fa fa-home" aria-hidden="true"></i></span>
+          <span>Mío (mine)</span>
+        </a>
+      </li>
+      <li id="team-link">
+        <a>
+          <span class="icon is-small"><i class="fa fa-cloud" aria-hidden="true"></i></span>
+          <span>Team</span>
+        </a>
+      </li>
+      <li id="notes-link">
+        <a>
+          <span class="icon is-small"><i class="fas fa-pagelines" aria-hidden="true"></i></span>
+          <span>Notes</span>
+        </a>
+      </li>
+    </ul>
   </div>
 
-</section>
+
+  <!-- hidden by default, in a modal -->
+  <%= render 'layouts/how_it_works' %>
+
+  <span id="dashboard-question-circle" class="icon is-medium">
+    <i class="fa fa-question-circle is-size-4"></i>
+  </span>
+  <div id="mío">
+    <div id="do-this-now-stuff">
+
+      <h1 class="title has-text-centered">
+        Stuff for right now
+      </h1>
+      <%= render 'tasks/sorted_tasks', tasks: @now_tasks %>
+    </div>
+    <br /><br />
+
+    <h1 class="title has-text-centered">
+      Other stuff
+    </h1>
+    <%= link_to 'new project', new_project_path, class: 'button is-success', style: 'margin:20px;position:relative;bottom:8px;' %>
+    <div id="projects" data-active-project-index="<%= @active_project_index %>">
+      <% @projects.each_with_index do |project, index| %>
+          <%= render 'projects/project', project: project, project_index: index %>
+      <% end %>
+    </div>
+  </div>
+  <div style="display:none;" id="team">
+    content team
+  </div>
+  <div style="display:none;" id="notes">
+    my notes and such.
+  </div>
 
 
 
