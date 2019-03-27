@@ -23,42 +23,19 @@ $(document).on('turbolinks:load', function(){
         $('[class^="isa_"]').fadeOut().empty();
     }, 4000);
 
-    changeTabsListener()
+    changeTabsListener();
 
+    activateProjectAccordions();
+});
+
+function activateProjectAccordions(){
     let $projects = $('#projects');
-   // let active_project_index = $projects.data('active-project-index');
+    // let active_project_index = $projects.data('active-project-index');
     $projects.accordion({
         heightStyle: 'content',
         active: '', //active_project_index == '' ? 0 : active_project_index, //which index div should be shown open. '' if none. For now, keep 1st open.
         collapsible: true
     })
-
-/*
-    $('.conjugation-accordion-indicative').accordion({
-        heightStyle: "content",
-        active: active_indic,
-        collapsible: true
-    });
-    $('.conjugation-accordion-subjunctive').accordion({
-        heightStyle: "content",
-        active: active_subj,
-        collapsible: true
-    });
-    $('.conjugation-accordion-imperative').accordion({
-        heightStyle: "content",
-        active: active_imp,
-        collapsible: true
-    });
-    */
-
-});
-
-function renderFlashMessages(flash_type, flash_message){
-    let flash_html = "<div class='isa_" + flash_type + " flash-offset flash-message'>" + flash_message + "</div>";
-    $('.site-content').before(flash_html);
-    setTimeout(function() {
-        $('.isa_' + flash_type).fadeOut().empty();
-    }, 4000);
 }
 
 function changeTabsListener(){
@@ -66,17 +43,33 @@ function changeTabsListener(){
         changeTabs(this);
     });
 }
+
 function changeTabs(clicked_tab){
     let tabs = $(clicked_tab).closest('ul').find('li');
+    activateTab(clicked_tab, tabs)
+    showTabContent(clicked_tab, tabs)
+}
 
+function activateTab(clicked_tab, tabs){
     $.each(tabs, function(i, tab){
         $(tab).removeClass('is-active');
-        let content_id = $(tab).attr('id').replace('-link', '');
-        $('#' + content_id).css('display', 'none');
     });
-
     $(clicked_tab).addClass('is-active');
+}
 
-    let id_to_show = $(clicked_tab).attr('id').replace('-link', '');
-    $('#' + id_to_show).show();
+function showTabContent(clicked_tab, tabs){
+    let content_id = $(clicked_tab).attr('id').replace('-link', '');
+    $.each(tabs, function(i, tab){
+        $('#' + $(tab).attr('id').replace('-link', '')).css('display', 'none')
+    });
+    $('#' + content_id).show();
+}
+
+
+function renderFlashMessages(flash_type, flash_message){
+    let flash_html = "<div class='isa_" + flash_type + " flash-offset flash-message'>" + flash_message + "</div>";
+    $('.site-content').before(flash_html);
+    setTimeout(function() {
+        $('.isa_' + flash_type).fadeOut().empty();
+    }, 4000);
 }
