@@ -7,7 +7,8 @@
     <%#= f.input :project, collection: (@projects || Project.all), label_method: :title, value_method: :id %>
 
     <%= f.label :project_id %>
-    <%= f.collection_select(:project_id, @projects || Project.all, :id, :title, include_blank: true, selected: @project.try(:project_id)) %>
+    <%= f.hidden_field :project_id, value: @task.project_id %>
+    <%#= f.collection_select(:project_id, @projects, :id, :title, selected: @task.project_id) %>
     <%= f.submit %>
 
 <% end %>

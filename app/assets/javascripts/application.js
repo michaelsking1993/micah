@@ -29,11 +29,11 @@ $(document).on('turbolinks:load', function(){
 });
 
 function activateProjectAccordions(){
-    let $projects = $('#projects');
+    let $projects = $('.projects');
     // let active_project_index = $projects.data('active-project-index');
     $projects.accordion({
         heightStyle: 'content',
-        active: '', //active_project_index == '' ? 0 : active_project_index, //which index div should be shown open. '' if none. For now, keep 1st open.
+        active: 0, //active_project_index == '' ? 0 : active_project_index, //which index div should be shown open. '' if none. For now, keep 1st open.
         collapsible: true
     })
 }

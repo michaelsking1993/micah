@@ -2,6 +2,7 @@
     <%= f.input :title %>
     <%= f.input :description %>
     <%= f.input :done %>
+    <%= f.hidden_field :team_id, value: @project.team_id %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.submit %>
 <% end %>

@@ -19,20 +19,14 @@ class ProjectsController < ApplicationController
 
 
   def index
-    @projects = current_user.my_sorted_projects
-    @now_tasks = @projects.flat_map(&:tasks).select(&:now)
-    if params[:step_id].present?
-      step_id = params[:step_id].to_i
-      project = Step.includes(task: [:project]).find(step_id).task.project
-      @active_project_index = nil
-      @projects.each_with_index do |proj, index|
-        if proj.id == project.id
-          @active_project_index = index
-        end
-      end
-    else
-      @active_project_index = ''
-    end
+    @team = Team.first #only allow our team for now
+
+    @team_projects = Project.sorted_projects(Team.first)
+    @team_now_tasks = @team_projects.flat_map(&:tasks).select(&:now)
+
+    @my_projects = Project.sorted_projects(current_user).select{|proj| proj.team_id.nil?}
+    @my_now_tasks = @my_projects.flat_map(&:tasks).select(&:now)
+
   end
 
   def show
@@ -40,7 +34,8 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
+    team_id = (params['team'].eql?('true') ? Team.first.id : nil)
+    @project = Project.new(team_id: team_id)
     @title = 'New Project'
     @form_path = 'projects/form'
     respond_to do |format|
@@ -90,6 +85,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :user_id, :done)
+    params.require(:project).permit(:title, :description, :user_id, :done, :team_id)
   end
 end

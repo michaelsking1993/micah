@@ -1,0 +1,25 @@
+<div class="do-this-now-stuff">
+  <h1 class="title has-text-centered">
+    <%= team ? "#{@team.team_name} stuff" : "#{current_user.first_name} #{current_user.last_name}'s stuff"  %>
+  </h1>
+  <h2 class="has-text-centered is-size-4">
+    <%= team ? 'TODO now:' : 'Stuff for now.' %>
+  </h2>
+  <% if now_tasks.blank? %>
+      Nothing marked as for now!
+  <% end %>
+  <%= render 'tasks/sorted_tasks', tasks: now_tasks %>
+</div>
+<br /><br />
+<h2 class="has-text-centered is-size-4">
+  <%= team ? 'TODO soon:' : 'Stuff for later.' %>
+</h2>
+<% if projects.blank? %>
+    No projects! Add one to get started.
+<% end %>
+<%= link_to 'new project', new_project_path(team: team), class: 'button is-success', style: 'margin:20px;position:relative;bottom:8px;', remote: true %>
+<div class="projects">
+  <% projects.each_with_index do |project, index| %>
+      <%= render 'projects/project', project: project, project_index: index %>
+  <% end %>
+</div>
