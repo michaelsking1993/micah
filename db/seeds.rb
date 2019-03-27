@@ -9,4 +9,8 @@
 unless Project.count > 0
   sample_user = User.create(first_name: 'sample', last_name: 'user', password_digest: 'sample_password', email: 'sample_email@sample.com')
   sample_projects = user.projects.create([{title: 'CocoMío MVP'}, {title: 'Micah'}])
+
+  sample_team = Team.create(team_name: 'CocoMío')
+  User.all.each{|user|
+    user.users_teams.create(team_id: sample_team.id)}
 end

@@ -27,6 +27,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      @user.users_teams.create(team_id: Team.first.id) if Team.count > 0 #TEMPORARY
+
       flash[:success] = 'Awesome! Create a project to get started.'
       redirect_to projects_path
     else
