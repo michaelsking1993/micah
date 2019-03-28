@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :projects, dependent: :nullify
   has_many :users_teams
   has_many :teams, through: :users_teams
+  has_many :notes
 
 
 end

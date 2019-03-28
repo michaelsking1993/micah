@@ -37,6 +37,14 @@
   </div>
   <div style="display:none;" id="notes">
     my notes and such.
+    <%= link_to 'add note', new_note_path, class: 'button is-success', remote: true %>
+    <% @team_notes.each do |note| %>
+      <div class="content">
+        <%= note.note %>
+      </div>
+
+
+    <% end %>
   </div>
 
 

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
+  helper_method :current_team
 
   protect_from_forgery with: :exception
 
@@ -9,5 +10,9 @@ class ApplicationController < ActionController::Base
     else
       @current_user = nil
     end
+  end
+
+  def current_team
+    @current_team = Team.first #just use our team for now...
   end
 end

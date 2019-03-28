@@ -1,6 +1,6 @@
 <div class="do-this-now-stuff">
   <h1 class="title has-text-centered">
-    <%= team ? "#{@team.team_name} stuff" : "#{current_user.first_name} #{current_user.last_name}'s stuff"  %>
+    <%= team ? "#{current_team.team_name} stuff" : "#{current_user.first_name} #{current_user.last_name}'s stuff"  %>
   </h1>
   <h2 class="has-text-centered is-size-4">
     <%= team ? 'TODO now:' : 'Stuff for now.' %>

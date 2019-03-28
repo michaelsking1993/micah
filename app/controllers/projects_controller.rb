@@ -19,13 +19,14 @@ class ProjectsController < ApplicationController
 
 
   def index
-    @team = Team.first #only allow our team for now
 
-    @team_projects = Project.sorted_projects(Team.first)
+    @team_projects = Project.sorted_projects(current_team)
     @team_now_tasks = @team_projects.flat_map(&:tasks).select(&:now)
+    @team_notes = current_team.notes.order(created_at: :desc)
 
     @my_projects = Project.sorted_projects(current_user).select{|proj| proj.team_id.nil?}
     @my_now_tasks = @my_projects.flat_map(&:tasks).select(&:now)
+
 
   end
 
@@ -34,7 +35,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    team_id = (params['team'].eql?('true') ? Team.first.id : nil)
+    team_id = (params['team'].eql?('true') ? current_team.id : nil)
     @project = Project.new(team_id: team_id)
     @title = 'New Project'
     @form_path = 'projects/form'

@@ -173,7 +173,7 @@
         <% task.status_updates.order(created_at: :desc).each do |status_update| %>
             <div class="box status-update">
               <span class="status-time"><%= status_update.created_at.strftime("%B %e,%l:%M %p") %></span>
-              <%= status_update.notes %>
+              <%= status_update.body %>
               <%= link_to 'edit', edit_status_update_path(status_update), class: 'edit-status-update', remote: true %>
             </div>
         <% end %>

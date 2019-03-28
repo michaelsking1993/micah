@@ -1,3 +1,4 @@
 class Note < ApplicationRecord
-  belongs_to :step
+  belongs_to :team
+  belongs_to :user
 end
