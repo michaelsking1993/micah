@@ -13,7 +13,7 @@ class StatusUpdatesController < ApplicationController
   def create
     @status_update = StatusUpdate.new(status_update_params)
     @status_update.save!
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @status_update.task.project.team_id)
   end
 
   def edit
@@ -27,7 +27,7 @@ class StatusUpdatesController < ApplicationController
   def update
     @status_update.update(status_update_params)
     flash[:notice] = 'Status updated'
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @status_update.task.project.team_id)
   end
 
   private

@@ -14,7 +14,7 @@ class StepsController < ApplicationController
     @step = Step.new(step_params)
     @step.save
     flash[:notice] = 'Step added -  knock \'em out'
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @step.task.project.team_id)
   end
 
   def edit
@@ -48,7 +48,7 @@ class StepsController < ApplicationController
   def destroy
     @step.destroy
     flash[:notice] = 'Step removed'
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @step.task.project.team_id)
   end
 
   private

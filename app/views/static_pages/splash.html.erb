@@ -203,7 +203,7 @@
     </div>
     <div class="btn-container">
       <% if current_user %>
-          <%= link_to projects_path do %>
+          <%= link_to projects_path(team_id: nil) do %>
               <div class="btn">
                 <span class="btn-text">See my tasks</span>
               </div>

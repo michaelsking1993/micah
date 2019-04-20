@@ -25,8 +25,14 @@ class ProjectsController < ApplicationController
     @team_notes = current_team.notes.order(created_at: :desc)
     @my_projects = current_user.sorted_projects
     @my_now_tasks = current_user.next_up
-
-
+    @open_tab = case params[:team_id]
+                  when nil
+                    'mío'
+                  when 'note'
+                    'notes'
+                  else
+                    'team'
+    end
   end
 
   def show
@@ -47,7 +53,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.save
     flash[:success] = 'Project created! Get to work.'
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @project.team_id)
   end
 
   def edit
@@ -61,13 +67,13 @@ class ProjectsController < ApplicationController
   def update
     @project.update(project_params)
     flash[:notice] = 'Project updated'
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @project.team_id)
   end
 
   def destroy
     @project.destroy
     flash[:notice] = 'Project destroyed'
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @project.team_id)
   end
 
 

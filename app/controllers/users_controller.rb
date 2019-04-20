@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       @user.users_teams.create(team_id: Team.first.id) if Team.count > 0 #TEMPORARY
 
       flash[:success] = 'Awesome! Create a project to get started.'
-      redirect_to projects_path
+      redirect_to projects_path(team_id: nil)
     else
       flash[:error] = 'something went wrong - try again'
       redirect_to new_user_path

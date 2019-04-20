@@ -31,12 +31,12 @@ class NotesController < ApplicationController
     else
       flash[:error] = 'uh oh, something went wrong. please contact admin.'
     end
-    redirect_to projects_path
+    redirect_to projects_path(team_id: 'note')
   end
 
   def destroy
     @note.destroy
-    redirect_to projects_path
+    redirect_to projects_path(team_id: 'note')
   end
 
   private
@@ -46,6 +46,6 @@ class NotesController < ApplicationController
   end
 
   def note_params
-    params.require(:note).permit(:body, :team_id, :user_id)
+    params.require(:note).permit(:note, :team_id, :user_id)
   end
 end

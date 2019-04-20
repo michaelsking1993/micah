@@ -15,15 +15,15 @@
     <%= render 'layouts/nav_tabs' %>
   </div>
   <div class="container">
-    <div id="mío">
+    <div id="mío" style="<%= 'display:none;' unless @open_tab.eql?('mío') %>">
       <%= render 'tasks/now_tasks', now_tasks: @my_now_tasks %>
       <%= render 'projects/base_template', projects: @my_projects, team: false %>
     </div>
-    <div id="team" style="display:none;">
+    <div id="team" style="<%= 'display:none;' unless @open_tab.eql?('team') %>">
       <%= render 'tasks/now_tasks', now_tasks: @team_now_tasks %>
       <%= render 'projects/base_template', projects: @team_projects, team: true %>
     </div>
-    <div id="notes" style="display:none;">
+    <div id="notes" style="<%= 'display:none;' unless @open_tab.eql?('notes') %>">
     <%= render 'notes/notes', notes: @team_notes %>
   </div>
   </div>

@@ -1,0 +1,3 @@
+<%= link_to 'Edit', edit_note_path(note), class: 'has-text-info', remote: true %>
+|
+<%= link_to 'Destroy', note_path(note), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'has-text-danger' %>

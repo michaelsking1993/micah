@@ -1,7 +1,52 @@
-my notes and such.
-<%= link_to 'add note', new_note_path, class: 'button is-success', remote: true %>
+<div class="buttons">
+  <%= link_to 'add note', new_note_path, class: 'button is-success', remote: true %>
+</div>
+
 <% @team_notes.each do |note| %>
-    <p class="box">
-      <%= note.note %>
-    </p>
+    <article class="media">
+      <figure class="media-left">
+        <p class="image is-64x64">
+          <img src="https://bulma.io/images/placeholders/128x128.png">
+        </p>
+      </figure>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong><%= full_name(note.user) %></strong> <small><%= username(note.user) %></small>, <small><%= time_ago_in_words(note.created_at) + ' ago' %></small>
+            <br>
+            <%= note.note %>
+          </p>
+        </div>
+        <nav class="level is-mobile">
+          <div class="level-left">
+            <% if current_user.eql?(note.user) %>
+                <%= link_to edit_note_path(note), class: 'level-item' do %>
+                    <span class="icon is-small"><i class="fa fa-edit"></i></span>
+                <% end %>
+                <%= link_to note_path(note), class: 'level-item', method: :delete, data: {confirm: 'are you sure?'} do %>
+                    <span class="icon is-small"><i class="fa fa-trash"></i></span>
+                <% end %>
+            <% else %>
+                <a onclick="alert('coming soon')" class="level-item">
+                  <span class="icon is-small"><i class="fa fa-reply"></i></span>
+                </a>
+                <a onclick="alert('coming soon')" class="level-item">
+                  <span class="icon is-small"><i class="fa fa-retweet"></i></span>
+                </a>
+                <a onclick="alert('coming soon')" class="level-item">
+                  <span class="icon is-small"><i class="fa fa-heart"></i></span>
+                </a>
+            <% end %>
+          </div>
+        </nav>
+      </div>
+      <!--<div class="media-right">
+        <button class="delete"></button>
+      </div>-->
+    </article>
 <% end %>
+<div class="container">
+  <div class="buttons">
+    <%= link_to 'add note', new_note_path, class: 'button is-success', remote: true %>
+  </div>
+</div>

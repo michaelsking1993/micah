@@ -12,7 +12,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.save
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @task.project.team_id)
   end
 
   def edit
@@ -26,13 +26,13 @@ class TasksController < ApplicationController
   def update
     @task.update(task_params)
     flash[:notice] = 'Task updated'
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @task.project.team_id)
   end
 
   def destroy
     @task.destroy
     flash[:notice] = 'Task destroyed - on to the next one.'
-    redirect_to projects_path
+    redirect_to projects_path(team_id: @task.project.team_id)
   end
 
   private
