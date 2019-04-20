@@ -1,6 +1,5 @@
 <% tasks.each_with_index do |task, index| %>
     <%= render 'tasks/task', task: task, task_index: index %>
-    <% unless index == (tasks.size - 1) %>
-        <hr>
-    <% end %>
+    <hr>
 <% end %>
+<%= link_to 'Add task', new_task_path(project_id: project_id), class: 'has-text-success', remote: true unless project_id.nil? %>

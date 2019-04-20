@@ -10,7 +10,7 @@
 
   <%#= link_to 'Open in separate page', project_path(project), class: 'card-footer-item' %>
   <div class="content">
-    <%= render 'tasks/sorted_tasks', tasks: project.sorted_tasks %>
+    <%= render 'tasks/sorted_tasks', tasks: project.sorted_tasks, project_id: project.id %>
   </div>
 
 </div>
