@@ -1,13 +1,17 @@
 <!-- hidden by default, in a modal -->
 <%= render 'layouts/how_it_works' %>
-<section class="section">
-  <div class="container content">
-    <h1 class="title has-text-centered is-marginless">
+<section style="background: linear-gradient(90deg, #04C3D5, #0283D6);" class="hero">
+  <div class="hero-body">
+    <h1 style="color:white;" class="title has-text-centered">
       <%= current_user.first_name + "'s area" %>
       <span class="dashboard-question-circle" class="icon is-medium">
         <i class="fa fa-question-circle is-size-4"></i>
       </span>
     </h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
     <div id="tabs" class="tabs is-medium is-toggle is-toggle-rounded is-centered">
     <ul>
       <li id="mío-link" class="is-active">
