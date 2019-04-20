@@ -1,5 +1,6 @@
 <%= simple_form_for @step do |f| %>
     <%= f.input :title %>
+    <%= f.input :order_of_importance %>
     <%#= f.input :description %>
     <%= f.hidden_field :task_id, value: @step.task_id %>
     <%= f.submit %>

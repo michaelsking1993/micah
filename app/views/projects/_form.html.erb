@@ -1,5 +1,6 @@
 <%= simple_form_for @project do |f| %>
     <%= f.input :title %>
+    <%= f.input :order_of_importance %>
     <%= f.input :description %>
     <%= f.input :done %>
     <%= f.hidden_field :team_id, value: @project.team_id %>

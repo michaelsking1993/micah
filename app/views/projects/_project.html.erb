@@ -10,5 +10,5 @@
     <%= link_to 'Add task', new_task_path(project_id: project.id), class: 'has-text-success', remote: true %>
   </div>
 
-  <%= render 'tasks/sorted_tasks', tasks: project.tasks %>
+  <%= render 'tasks/sorted_tasks', tasks: project.sorted_tasks %>
 </div>

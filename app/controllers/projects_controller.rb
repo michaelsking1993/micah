@@ -12,7 +12,7 @@ class ProjectsController < ApplicationController
     #TODO: this will throw an error on local databases. Make this change.
     @project = Project.find_by(title: 'CocoMío')
     #get other projects through CocoMío owner for now...
-    @now_goals = @project.tasks.select(&:now)
+    @now_goals = @project.next_up
     @projects = Project.all
 
   end
@@ -20,18 +20,17 @@ class ProjectsController < ApplicationController
 
   def index
 
-    @team_projects = Project.sorted_projects(current_team)
-    @team_now_tasks = @team_projects.flat_map(&:tasks).select(&:now)
+    @team_projects = current_team.sorted_projects
+    @team_now_tasks = current_team.next_up
     @team_notes = current_team.notes.order(created_at: :desc)
-
-    @my_projects = Project.sorted_projects(current_user).select{|proj| proj.team_id.nil?}
-    @my_now_tasks = @my_projects.flat_map(&:tasks).select(&:now)
+    @my_projects = current_user.sorted_projects
+    @my_now_tasks = current_user.next_up
 
 
   end
 
   def show
-    @tasks = @project.tasks.order(created_at: :asc)
+    @tasks = @project.sorted_tasks
   end
 
   def new
@@ -80,12 +79,12 @@ class ProjectsController < ApplicationController
 
   def validate_user
     unless current_user
-      flash[:notice] = 'Sign up or login to access that page'
+      flash[:notice] = 'Now go ahead and login (will fix this soon)'
       redirect_to root_path
     end
   end
 
   def project_params
-    params.require(:project).permit(:title, :description, :user_id, :done, :team_id)
+    params.require(:project).permit(:title, :order_of_importance, :description, :user_id, :done, :team_id)
   end
 end
