@@ -1,32 +1,32 @@
-<div data-task-index="<%= task_index %>" style="background-color:<%= task.color? ? task.color : '' %>" class='task-div content'>
-  <div class="task-description">
+<div data-task-index="<%= task_index %>" style="background-color:<%= task.color? ? task.color : '' %>" class='columns task-div'>
+  <!--<div class="task-description">-->
+  <div style="border-right: 2px solid black;" class="column is-3">
     <h4 style="text-decoration:<%= task.done ? 'line-through' : '' %>" class=""><%= task.title %></h4>
     <p style="text-decoration:<%= task.done ? 'line-through' : '' %>"><%= task.description %></p>
     <% if task.done %>
         <h3 class="has-text-centered is-size-4">DONE</h3>
     <% end %>
-    <div class="task-step-border-wall"></div>
+    <%= link_to task_path(task), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'has-text-danger is-size-6' do %>
+        <i class="fa fa-trash"></i>
+    <% end %>
+    |
+    <%= link_to 'Edit', edit_task_path(task), class: 'is-size-6', remote: true %>
   </div>
-  <%= link_to task_path(task), method: :delete, data: {confirm: 'are you sure? This will destroy all related steps and statuses'}, class: 'destroy-task has-text-danger is-size-6' do %>
-      <i class="fa fa-trash"></i>
-  <% end %>
-  <%= link_to 'Edit', edit_task_path(task), class: 'edit-task is-size-6', remote: true %>
 
-  <%= link_to 'Add step', new_step_path(task_id: task.id), class: 'new-step-link', remote: true %>
-  <div class="step-list">
+  <div style="border-right: 2px solid black;" class="column is-3">
     <% task.steps.sort_by{|step| step.created_at}.each_with_index do |step, index| %>
         <%= render 'steps/step', step: step, step_index: index %>
     <% end %>
+    <%= link_to 'Add step', new_step_path(task_id: task.id), remote: true %>
   </div>
-  <div class="step-status-border-wall"></div>
-  <%= link_to 'New status', new_status_update_path(task_id: task.id), class: 'new-update-link', remote: true %>
-  <div class="status-updates">
+  <div style="overflow-y:scroll;" class="column is-6">
     <% task.status_updates.order(created_at: :desc).each do |status_update| %>
         <div class="box status-update">
           <span class="status-time"><%= status_update.created_at.strftime("%B %e,%l:%M %p") %></span>
           <%= status_update.body %>
-          <%= link_to 'edit', edit_status_update_path(status_update), class: 'edit-status-update', remote: true %>
+          <%= link_to 'edit', edit_status_update_path(status_update), remote: true %>
         </div>
     <% end %>
+    <%= link_to 'New status', new_status_update_path(task_id: task.id), remote: true %>
   </div>
 </div>

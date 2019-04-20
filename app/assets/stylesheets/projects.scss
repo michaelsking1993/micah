@@ -3,10 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-#dashboard-question-circle {
-  position: relative;
-  left:49.8%;
-  top:0%;
+.dashboard-question-circle {
   &:hover {
     cursor:pointer;
   }
@@ -33,10 +30,7 @@
 /* Task styles */
 
 .task-div {
-  height: 200px;
   background-color: lightgrey;
-  //margin: 2%;
-  position: relative;
 }
 .task-description {
   display: inline-block;
@@ -49,36 +43,12 @@
   overflow-y: auto;
 }
 
-.edit-task {
-  position: absolute;
-  bottom: -12%;
-  left: 8%;
-  //font-size:15px;
-}
-
-.destroy-task {
-  position: absolute;
-  bottom: -12%;
-  left: 3%;
-}
-
-
-
-
 
 .done-step {
   text-decoration:line-through;
 }
-.task-step-border-wall {
-  position:absolute;
-  right: 0;
-  width: 3px;
-  height: 100%;
-  background-color: black;
-  top: 0;
-}
 
-.step-list {
+/*.step-list {
   width:25%;
   height:100%;
   overflow-y:auto;
@@ -88,15 +58,9 @@
   top:0;
   padding-left:2px;
   padding-top:6px;
-}
+}*/
 
-
-.new-step-link {
-  position:absolute;
-  left:16.6%;
-  bottom:-12%;
-}
-
+/*
 .step-status-border-wall {
   position:absolute;
   left:42.4%;
@@ -104,15 +68,8 @@
   height:100%;
   background-color:darkgrey;
   top:0;
-}
+}*/
 
-.status-updates {
-  position:absolute;
-  top:0;
-  left:42.6%;
-  height:100%;
-  overflow-x:auto;
-}
 .status-update {
   left:0.6%;
   position:relative;
@@ -123,11 +80,6 @@
   margin-right:8px;
   word-wrap:break-word;
   overflow-y:auto;
-}
-.new-update-link {
-  position:absolute;
-  left:43%;
-  bottom:-12%;
 }
 
 .status-time {
@@ -146,13 +98,6 @@
 }
 
 .step-icon {
-  font-size:12px;
-}
-
-.edit-status-update {
-  position:absolute;
-  left:1%;
-  top:-1%;
   font-size:12px;
 }
 

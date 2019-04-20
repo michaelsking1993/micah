@@ -1,0 +1,7 @@
+my notes and such.
+<%= link_to 'add note', new_note_path, class: 'button is-success', remote: true %>
+<% @team_notes.each do |note| %>
+    <p class="box">
+      <%= note.note %>
+    </p>
+<% end %>

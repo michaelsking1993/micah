@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', () => {
     //let $body = $('body');
     let $tutorial_modal = $('#tutorial-modal');
 
-    $('#dashboard-question-circle').on('click', () =>  {
+    $('.dashboard-question-circle').on('click', () =>  {
         $tutorial_modal.toggleClass('is-active');
     })
 

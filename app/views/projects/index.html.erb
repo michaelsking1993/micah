@@ -1,54 +1,48 @@
 <!-- hidden by default, in a modal -->
 <%= render 'layouts/how_it_works' %>
-
-<section class="navbar">
-  <div class="container">
-    <div id="tabs" class="tabs is-medium is-toggle is-toggle-rounded">
-      <ul>
-        <li id="mío-link" class="is-active">
-          <a>
-            <span class="icon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
-            <span>Mío (mine)</span>
-          </a>
-        </li>
-        <li id="team-link">
-          <a>
-            <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
-            <span>Team</span>
-          </a>
-        </li>
-        <li id="notes-link">
-          <a>
-            <span class="icon"><i class="fa fa-sticky-note" aria-hidden="true"></i></span>
-            <span>Notes</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-<section>
-
-    <span id="dashboard-question-circle" class="icon is-medium">
+<section class="hero">
+  <div class="hero-body container">
+    <h1 class="title">
+      <%= current_user.first_name + "'s area" %>
+      <span class="dashboard-question-circle" class="icon is-medium">
       <i class="fa fa-question-circle is-size-4"></i>
     </span>
-    <div id="mío">
-      <%= render 'projects/base_template', projects: @my_projects, now_tasks: @my_now_tasks, team: false %>
-    </div>
-    <div style="display:none;" id="team">
-      <%= render 'projects/base_template', projects: @team_projects, now_tasks: @team_now_tasks, team: true %>
-    </div>
-    <div style="display:none;" id="notes">
-      my notes and such.
-      <%= link_to 'add note', new_note_path, class: 'button is-success', remote: true %>
-      <% @team_notes.each do |note| %>
-          <div class="content">
-            <%= note.note %>
-          </div>
-
-
-      <% end %>
-
+    </h1>
+  </div>
+  <div id="tabs" class="tabs is-medium is-toggle is-centered is-toggle-rounded">
+    <ul>
+      <li id="mío-link" class="is-active">
+        <a>
+          <span class="icon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
+          <span>Mío (mine)</span>
+        </a>
+      </li>
+      <li id="team-link">
+        <a>
+          <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
+          <span>Team</span>
+        </a>
+      </li>
+      <li id="notes-link">
+        <a>
+          <span class="icon"><i class="fa fa-sticky-note" aria-hidden="true"></i></span>
+          <span>Notes</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </section>
+
+<div id="mío">
+  <%= render 'tasks/now_tasks', now_tasks: @my_now_tasks %>
+  <%= render 'projects/base_template', projects: @my_projects, team: false %>
+</div>
+<div id="team" style="display:none;">
+  <%= render 'tasks/now_tasks', now_tasks: @team_now_tasks %>
+  <%= render 'projects/base_template', projects: @team_projects, team: true %>
+</div>
+<div id="notes" style="display:none;">
+  <%= render 'notes/notes', notes: @team_notes %>
+</div>
+
 
