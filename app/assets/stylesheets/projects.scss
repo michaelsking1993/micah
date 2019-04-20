@@ -9,6 +9,7 @@
 
 .task-description {
   border-right: 2px solid black;
+  overflow-wrap: break-word;
 }
 .dashboard-question-circle {
   &:hover {
