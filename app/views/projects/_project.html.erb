@@ -1,5 +1,5 @@
-<h3 style="text-decoration:<%= project.done ? 'line-through' : '' %>" class="subtitle"><strong><%= project.title %></strong> (<%= project.created_at.strftime("%B %Y") %>) </h3>
-<div data-project-index="<%= project_index %>" style="position:relative;">
+<h3 style="text-decoration:<%= project.done ? 'line-through' : '' %>"><strong><%= project.title %></strong> (<%= project.created_at.strftime("%B %Y") %>) </h3>
+<div data-project-index="<%= project_index %>" style="position:relative;margin:10px;">
   <h1 class="title has-text-centered"><%= project.title %></h1>
   <h2 style="margin-bottom:0;" class="subtitle has-text-centered"><%= project.description || '[no description]' %></h2>
 

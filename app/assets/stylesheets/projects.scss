@@ -35,7 +35,7 @@
 .task-div {
   height: 200px;
   background-color: lightgrey;
-  margin: 2%;
+  //margin: 2%;
   position: relative;
 }
 .task-description {
@@ -44,7 +44,7 @@
   height: 100%;
   position: relative;
   //top:10%;
-  margin: 4px 0 0 4px;
+  padding: 4px 0 0 4px;
   overflow-wrap: break-word;
   overflow-y: auto;
 }

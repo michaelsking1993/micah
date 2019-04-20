@@ -19,7 +19,7 @@ class User < ApplicationRecord
   end
 
   def sort_projects
-    Project.sort_projects(projects)
+    Project.sort_projects(projects.where(team_id: nil))
   end
 
 end
