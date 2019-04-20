@@ -73,3 +73,12 @@ function renderFlashMessages(flash_type, flash_message){
         $('.isa_' + flash_type).fadeOut().empty();
     }, 4000);
 }
+
+function focusCursor(){
+    let title = $("[id$='_title']:visible");
+    if (title.length > 0){
+        title.focus();
+    } else {
+        $('form').find('textarea').eq(0).focus();
+    }
+}
