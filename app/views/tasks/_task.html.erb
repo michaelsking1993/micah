@@ -1,7 +1,7 @@
 <div data-task-index="<%= task_index %>" style="background-color:<%= task.color? ? task.color : 'lightgrey' %>" class='columns task-div'>
   <!--<div class="task-description">-->
-  <div style="border-right: 2px solid black;" class="column is-3">
-    <h4 style="text-decoration:<%= task.done ? 'line-through' : '' %>" class=""><%= task.title %></h4>
+  <div class="column is-3 task-description">
+    <%= tag.h4 task.title, class: "has-text-centered #{'done' if task.done?}" %>
     <p style="text-decoration:<%= task.done ? 'line-through' : '' %>"><%= task.description %></p>
     <% if task.done %>
         <h3 class="has-text-centered is-size-4">DONE</h3>

@@ -2,17 +2,14 @@
 <div data-project-index="<%= project_index %>" style="position:relative;margin:10px;">
   <h1 class="title has-text-centered"><%= project.title %></h1>
   <% unless project.description.empty? %>
-      <p class="has-text-centered"><%= project.description || '[no description]' %></p>
+      <h2 class="subtitle has-text-centered"><%= project.description || '[no description]' %></h2>
   <% end %>
+  <div class="project-buttons has-text-centered">
+    <%= render 'projects/buttons', project: project %>
+  </div>
 
   <%#= link_to 'Open in separate page', project_path(project), class: 'card-footer-item' %>
-  <div style="position:relative;bottom:1rem;" class="has-text-centered">
-    <%= link_to 'Edit', edit_project_path(project), class: 'has-text-info', remote: true %>
-    |
-    <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'has-text-danger' %>
-    |
-    <%= link_to 'Add task', new_task_path(project_id: project.id), class: 'has-text-success', remote: true %>
-  </div>
+
 
   <%= render 'tasks/sorted_tasks', tasks: project.sorted_tasks %>
 </div>

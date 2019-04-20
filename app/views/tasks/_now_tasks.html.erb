@@ -1,7 +1,8 @@
-
-    <% if now_tasks.blank? %>
-        Nothing marked as for now!<br>
-    <% else %>
-        <h2>Next up:</h2>
-    <% end %>
-    <%= render 'tasks/sorted_tasks', tasks: now_tasks %>
+<div class="container content">
+  <% if now_tasks.blank? %>
+      Nothing marked as for now!<br>
+  <% else %>
+      <h2>Next up:</h2>
+  <% end %>
+  <%= render 'tasks/sorted_tasks', tasks: now_tasks %>
+</div>

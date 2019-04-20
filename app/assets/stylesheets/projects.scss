@@ -2,7 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.project-buttons {
+  position: relative;
+  bottom: 1rem;
+}
 
+.task-description {
+  border-right: 2px solid black;
+}
 .dashboard-question-circle {
   &:hover {
     cursor:pointer;
@@ -28,6 +35,10 @@
 }
 
 /* Task styles */
+
+.done {
+  text-decoration: line-through;
+}
 
 .done-step {
   text-decoration:line-through;
