@@ -1,20 +1,19 @@
 <!-- hidden by default, in a modal -->
 <%= render 'layouts/how_it_works' %>
-<section class="hero">
-  <div class="hero-body container">
-    <h1 class="title">
+<section class="section">
+  <div class="container content">
+    <h1 class="title has-text-centered is-marginless">
       <%= current_user.first_name + "'s area" %>
       <span class="dashboard-question-circle" class="icon is-medium">
-      <i class="fa fa-question-circle is-size-4"></i>
-    </span>
+        <i class="fa fa-question-circle is-size-4"></i>
+      </span>
     </h1>
-  </div>
-  <div id="tabs" class="tabs is-medium is-toggle is-centered is-toggle-rounded">
+    <div id="tabs" class="tabs is-medium is-toggle is-toggle-rounded is-centered">
     <ul>
       <li id="mío-link" class="is-active">
         <a>
           <span class="icon"><i class="fa fa-user-circle" aria-hidden="true"></i></span>
-          <span>Mío (mine)</span>
+          <span>Mío</span>
         </a>
       </li>
       <li id="team-link">
@@ -31,18 +30,19 @@
       </li>
     </ul>
   </div>
+    <div id="mío">
+      <%= render 'tasks/now_tasks', now_tasks: @my_now_tasks %>
+      <%= render 'projects/base_template', projects: @my_projects, team: false %>
+    </div>
+    <div id="team" style="display:none;">
+      <%= render 'tasks/now_tasks', now_tasks: @team_now_tasks %>
+      <%= render 'projects/base_template', projects: @team_projects, team: true %>
+    </div>
+    <div id="notes" style="display:none;">
+    <%= render 'notes/notes', notes: @team_notes %>
+  </div>
+  </div>
 </section>
 
-<div id="mío">
-  <%= render 'tasks/now_tasks', now_tasks: @my_now_tasks %>
-  <%= render 'projects/base_template', projects: @my_projects, team: false %>
-</div>
-<div id="team" style="display:none;">
-  <%= render 'tasks/now_tasks', now_tasks: @team_now_tasks %>
-  <%= render 'projects/base_template', projects: @team_projects, team: true %>
-</div>
-<div id="notes" style="display:none;">
-  <%= render 'notes/notes', notes: @team_notes %>
-</div>
 
 

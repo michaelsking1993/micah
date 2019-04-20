@@ -6,7 +6,7 @@
   <% end %>
 
   <%#= link_to 'Open in separate page', project_path(project), class: 'card-footer-item' %>
-  <div class="content has-text-centered">
+  <div style="position:relative;bottom:1rem;" class="has-text-centered">
     <%= link_to 'Edit', edit_project_path(project), class: 'has-text-info', remote: true %>
     |
     <%= link_to 'Destroy', project_path(project), method: :delete, data: {confirm: 'are you sure? This will destroy all related tasks, steps, status updates, etc.'}, class: 'has-text-danger' %>
