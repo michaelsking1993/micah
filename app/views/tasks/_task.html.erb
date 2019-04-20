@@ -17,7 +17,7 @@
     <% task.steps.sort_by{|step| step.created_at}.each_with_index do |step, index| %>
         <%= render 'steps/step', step: step, step_index: index %>
     <% end %>
-    <%= link_to 'Add step', new_step_path(task_id: task.id), remote: true %>
+    <%= link_to 'Add step', new_step_path(task_id: task.id), class: 'has-text-info', remote: true %>
   </div>
   <div style="overflow-y:scroll;" class="column is-6">
     <% task.status_updates.order(created_at: :desc).each do |status_update| %>
