@@ -1,6 +1,6 @@
 <%= simple_form_for @status_update do |f| %>
     <%#= f.input :title %>
-    <%= f.input :notes %>
+    <%= f.input :body %>
     <%= f.hidden_field :task_id, value: @status_update.task_id %>
     <%= f.submit %>
 <% end %>
