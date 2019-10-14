@@ -10,7 +10,7 @@ gem 'font-awesome-rails'
 gem 'activerecord-session_store'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.6', '>= 5.1.6.1'
+gem 'rails'
 
 #use simple_form for forms
 gem 'simple_form'

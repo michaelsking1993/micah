@@ -37,6 +37,6 @@ class StatusUpdatesController < ApplicationController
   end
 
   def status_update_params
-    params.require(:status_update).permit(:title, :notes, :task_id)
+    params.require(:status_update).permit(:title, :body, :task_id)
   end
 end
